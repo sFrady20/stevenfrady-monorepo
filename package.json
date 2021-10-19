@@ -1,0 +1,12 @@
+{
+  "name": "stevenfrady-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Steven Frady",
+  "license": "MIT",
+  "packageManager": "yarn@3.0.2",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}
