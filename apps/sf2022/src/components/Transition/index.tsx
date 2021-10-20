@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Route, Switch } from "react-router";
 
 const PageTransition = (props: { children: ReactNode }) => {

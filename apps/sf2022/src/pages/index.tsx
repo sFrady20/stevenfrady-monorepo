@@ -16,7 +16,8 @@ import {
 } from "framer-motion";
 import { ReactNode, useEffect, useRef } from "react";
 import { Shader } from "shaders";
-import frag from "./transition.frag.glsl?raw";
+import foregroundFrag from "./foreground.frag.glsl?raw";
+import backgroundFrag from "./background.frag.glsl?raw";
 
 export const PAGE_VARIANTS = {
   initial: "pageInit",
@@ -74,42 +75,51 @@ export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
   const transitionPresence = useMotionValue(1);
 
   const uniforms = useRef({
-    presence: { value: 1 },
+    transition: { value: -1 },
     velocity: { value: 0 },
   }).current;
 
   return (
     <>
       <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-50">
-        <Shader uniforms={uniforms} frag={frag} />
+        <Shader uniforms={uniforms} frag={foregroundFrag} />
       </div>
-      <AnimatePresence exitBeforeEnter initial={false}>
-        <PageTransition
-          key={location.pathname}
-          onEnter={() => {
-            animate(transitionPresence, 1, {
-              onUpdate: (v) => {
-                uniforms.presence.value = v;
-              },
-            });
-          }}
-          onExit={async () => {
-            transitionPresence.updateAndNotify(-1);
-            await new Promise<void>((resolve) => {
+      <div className="absolute left-0 top-0 w-full h-full z-20">
+        <AnimatePresence exitBeforeEnter initial={false}>
+          <PageTransition
+            key={location.pathname}
+            onEnter={() => {
+              transitionPresence.updateAndNotify(-1);
               animate(transitionPresence, 0, {
+                duration: 0.5,
                 onUpdate: (v) => {
-                  uniforms.presence.value = v;
+                  uniforms.transition.value = v;
                 },
-                onComplete: resolve,
               });
-            });
-          }}
-        >
-          <Switch {...innerProps} location={location}>
-            {children}
-          </Switch>
-        </PageTransition>
-      </AnimatePresence>
+            }}
+            onExit={async () => {
+              await new Promise<void>((resolve) => {
+                animate(transitionPresence, 1, {
+                  duration: 0.5,
+                  onUpdate: (v) => {
+                    uniforms.transition.value = v;
+                  },
+                  onComplete: () => {
+                    resolve();
+                  },
+                });
+              });
+            }}
+          >
+            <Switch {...innerProps} location={location}>
+              {children}
+            </Switch>
+          </PageTransition>
+        </AnimatePresence>
+      </div>
+      <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-0">
+        <Shader uniforms={uniforms} frag={backgroundFrag} />
+      </div>
     </>
   );
 };
