@@ -1,3 +1,3 @@
 import Shader from "./Shader";
 
-export { Shader };
+export default Shader;

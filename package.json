@@ -8,5 +8,8 @@
   "workspaces": [
     "packages/*",
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "path": "^0.12.7"
+  }
 }

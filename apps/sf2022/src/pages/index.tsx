@@ -15,7 +15,7 @@ import {
   Variants,
 } from "framer-motion";
 import { ReactNode, useEffect, useRef } from "react";
-import { Shader } from "shaders";
+import { ShaderCanvas } from "base";
 import foregroundFrag from "./foreground.frag.glsl?raw";
 import backgroundFrag from "./background.frag.glsl?raw";
 
@@ -82,7 +82,7 @@ export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
   return (
     <>
       <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-50">
-        <Shader uniforms={uniforms} frag={foregroundFrag} />
+        <ShaderCanvas uniforms={uniforms} frag={foregroundFrag} />
       </div>
       <div className="absolute left-0 top-0 w-full h-full z-20">
         <AnimatePresence exitBeforeEnter initial={false}>
@@ -118,7 +118,7 @@ export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
         </AnimatePresence>
       </div>
       <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-0">
-        <Shader uniforms={uniforms} frag={backgroundFrag} />
+        <ShaderCanvas uniforms={uniforms} frag={backgroundFrag} />
       </div>
     </>
   );
