@@ -16,8 +16,8 @@ import {
 } from "framer-motion";
 import { ReactNode, useEffect, useRef } from "react";
 import { ShaderCanvas } from "base";
-import foregroundFrag from "./foreground.frag.glsl?raw";
-import backgroundFrag from "./background.frag.glsl?raw";
+import foregroundFrag from "./foreground.frag.glsl";
+import backgroundFrag from "./background.frag.glsl";
 
 export const PAGE_VARIANTS = {
   initial: "pageInit",
@@ -48,7 +48,7 @@ export const pageVariants = (
 
 const PageTransition = (props: {
   children?: ReactNode;
-  onEnter?: () => void;
+  onEnter?: () => Promise<void>;
   onExit?: () => Promise<void>;
 }) => {
   const { children, onEnter, onExit } = props;
@@ -57,10 +57,11 @@ const PageTransition = (props: {
   useEffect(() => {
     (async () => {
       if (isPresent) {
-        onEnter?.();
-      } else if (exit) {
+        await onEnter?.();
+        exit && exit();
+      } else {
         await onExit?.();
-        exit();
+        exit && exit();
       }
     })();
   }, [isPresent]);
@@ -68,44 +69,58 @@ const PageTransition = (props: {
   return <>{children}</>;
 };
 
+const seed = Math.random() * 100;
+
 export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
   const { children, ...innerProps } = props;
   const location = useLocation();
 
-  const transitionPresence = useMotionValue(1);
+  const transitionIndex = useRef(-0.5);
+  const transitionMotion = useMotionValue(0);
 
   const uniforms = useRef({
-    transition: { value: -1 },
+    seed: { value: seed },
+    transition: { value: 0 },
     velocity: { value: 0 },
   }).current;
 
+  const onValueUpdate = (val: number) => {
+    uniforms.transition.value = val;
+  };
+
   return (
     <>
-      <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-50">
-        <ShaderCanvas uniforms={uniforms} frag={foregroundFrag} />
+      <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-0">
+        <ShaderCanvas uniforms={uniforms} frag={backgroundFrag} />
       </div>
       <div className="absolute left-0 top-0 w-full h-full z-20">
         <AnimatePresence exitBeforeEnter initial={false}>
           <PageTransition
             key={location.pathname}
-            onEnter={() => {
-              transitionPresence.updateAndNotify(-1);
-              animate(transitionPresence, 0, {
-                duration: 0.5,
-                onUpdate: (v) => {
-                  uniforms.transition.value = v;
-                },
+            onEnter={async () => {
+              await new Promise<void>(async (resolve) => {
+                const next = Math.round(transitionIndex.current + 0.5);
+                transitionIndex.current = next;
+                animate(transitionMotion, next, {
+                  duration: 0.7,
+                  ease: "easeOut",
+                  onUpdate: onValueUpdate,
+                  onComplete: () => {
+                    setTimeout(resolve, 300);
+                  },
+                });
               });
             }}
             onExit={async () => {
               await new Promise<void>((resolve) => {
-                animate(transitionPresence, 1, {
-                  duration: 0.5,
-                  onUpdate: (v) => {
-                    uniforms.transition.value = v;
-                  },
+                const next = Math.round(transitionIndex.current + 0.5) - 0.5;
+                transitionIndex.current = next;
+                animate(transitionMotion, next, {
+                  duration: 0.7,
+                  ease: "easeIn",
+                  onUpdate: onValueUpdate,
                   onComplete: () => {
-                    resolve();
+                    setTimeout(resolve, 300);
                   },
                 });
               });
@@ -117,8 +132,8 @@ export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
           </PageTransition>
         </AnimatePresence>
       </div>
-      <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-0">
-        <ShaderCanvas uniforms={uniforms} frag={backgroundFrag} />
+      <div className="absolute left-0 top-0 w-full h-full pointer-events-none z-50">
+        <ShaderCanvas uniforms={uniforms} frag={foregroundFrag} />
       </div>
     </>
   );
@@ -132,22 +147,7 @@ export const PageRoute = (props: RouteProps & { children: ReactNode }) => {
       <motion.div
         className="absolute w-full h-full left-0 top-0 flex justify-center items-center overflow-x-hidden"
         {...PAGE_VARIANTS}
-        variants={pageVariants({
-          initial: { scale: 0.98, translateX: -32, opacity: 0 },
-          animate: {
-            scale: 1,
-            translateX: 0,
-            opacity: 1,
-            transition: {
-              duration: 1,
-            },
-          },
-          exit: {
-            scale: 0.98,
-            translateX: 32,
-            opacity: 0,
-          },
-        })}
+        variants={pageVariants()}
       >
         {children}
       </motion.div>

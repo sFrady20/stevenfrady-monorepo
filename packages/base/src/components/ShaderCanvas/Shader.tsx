@@ -1,9 +1,10 @@
-import React, { RefAttributes } from "react";
+import React, { RefAttributes, useEffect, useRef } from "react";
 import { Canvas, ShaderMaterialProps, useFrame } from "@react-three/fiber";
 import { ScreenQuad } from "./ScreenQuad";
 import defaultFragmentShader from "./frag.glsl";
 import defaultVertexShader from "./vert.glsl";
 import _ from "lodash";
+import { Vector2 } from "three";
 
 const ShaderScene = (props: {
   uniforms?: { [s: string]: { value: any } };
@@ -11,6 +12,17 @@ const ShaderScene = (props: {
   vert?: string;
 }) => {
   const { uniforms, frag, vert } = props;
+  const mouseVec = useRef(new Vector2()).current;
+
+  useEffect(() => {
+    const listener = (e: MouseEvent) => {
+      mouseVec.set(e.clientX, e.clientY);
+    };
+    document.addEventListener("mousemove", listener);
+    return () => {
+      document.removeEventListener("mousemove", listener);
+    };
+  });
 
   const ref = React.useRef<ShaderMaterialProps>(null);
   useFrame((state) => {
@@ -18,6 +30,9 @@ const ShaderScene = (props: {
       _.merge(ref.current.uniforms, {
         time: {
           value: state.clock.elapsedTime,
+        },
+        mouse: {
+          value: mouseVec,
         },
         resolution: {
           value: [
