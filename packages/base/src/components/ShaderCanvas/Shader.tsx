@@ -22,7 +22,7 @@ const ShaderScene = (props: {
     return () => {
       document.removeEventListener("mousemove", listener);
     };
-  });
+  }, []);
 
   const ref = React.useRef<ShaderMaterialProps>(null);
   useFrame((state) => {

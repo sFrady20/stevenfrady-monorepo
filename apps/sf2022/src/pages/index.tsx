@@ -31,6 +31,7 @@ const variantPresets = {
     [PAGE_VARIANTS.exit]: { opacity: 0 },
   },
 };
+
 export const pageVariants = (
   variants:
     | keyof typeof variantPresets
