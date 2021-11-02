@@ -1,10 +1,10 @@
-import React, { RefAttributes, useEffect, useRef } from "react";
+import React, { RefAttributes } from "react";
 import { Canvas, ShaderMaterialProps, useFrame } from "@react-three/fiber";
 import { ScreenQuad } from "./ScreenQuad";
-import defaultFragmentShader from "./frag.glsl";
-import defaultVertexShader from "./vert.glsl";
+import defaultFragmentShader from "./default.frag.glsl";
+import defaultVertexShader from "./default.vert.glsl";
 import _ from "lodash";
-import { Vector2 } from "three";
+import { useCursorPositionRef, useScrollRef } from "..";
 
 const ShaderScene = (props: {
   uniforms?: { [s: string]: { value: any } };
@@ -12,17 +12,6 @@ const ShaderScene = (props: {
   vert?: string;
 }) => {
   const { uniforms, frag, vert } = props;
-  const mouseVec = useRef(new Vector2()).current;
-
-  useEffect(() => {
-    const listener = (e: MouseEvent) => {
-      mouseVec.set(e.clientX, e.clientY);
-    };
-    document.addEventListener("mousemove", listener);
-    return () => {
-      document.removeEventListener("mousemove", listener);
-    };
-  }, []);
 
   const ref = React.useRef<ShaderMaterialProps>(null);
   useFrame((state) => {
@@ -30,9 +19,6 @@ const ShaderScene = (props: {
       _.merge(ref.current.uniforms, {
         time: {
           value: state.clock.elapsedTime,
-        },
-        mouse: {
-          value: mouseVec,
         },
         resolution: {
           value: [
@@ -66,9 +52,23 @@ const Shader = (
 ) => {
   const { uniforms, frag, vert, ...innerProps } = props;
 
+  const cursorPositionRef = useCursorPositionRef();
+  const scrollRef = useScrollRef();
+
   return (
     <Canvas gl={{ alpha: true }} {...innerProps}>
-      <ShaderScene uniforms={uniforms} frag={frag} vert={vert} />
+      <ShaderScene
+        uniforms={_.merge(uniforms, {
+          cursor: {
+            value: cursorPositionRef,
+          },
+          scroll: {
+            value: scrollRef,
+          },
+        })}
+        frag={frag}
+        vert={vert}
+      />
     </Canvas>
   );
 };

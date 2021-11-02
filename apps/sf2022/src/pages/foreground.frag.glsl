@@ -1,7 +1,8 @@
 uniform float time;
 uniform float seed;
 uniform vec2 resolution;
-uniform vec2 mouse;
+uniform vec2 cursor;
+uniform vec2 scroll;
 uniform float transition;
 
 const	float nMag = 0.05;
@@ -24,7 +25,7 @@ float noise(vec2 p){
 
 
 void main() {
-  vec2 p = gl_FragCoord.xy;
+  vec2 p = gl_FragCoord.xy - scroll;
 	p.y = resolution.y - p.y;
 
   vec2 uv = gl_FragCoord.xy / resolution.xy;

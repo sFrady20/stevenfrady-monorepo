@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 const Title = () => {
   return (
     <>
@@ -16,7 +14,7 @@ const Title = () => {
       </svg>
 
       <h1
-        className="text-size-9rem text-gray-50 font-extrabold relative"
+        className="text-size-9rem text-gray-50 font-extrabold relative cursor-default"
         style={{ filter: "url(#outliner)" }}
       >
         CREATIVE
