@@ -1,36 +1,41 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import { Vector2 } from "three";
 import { useContextSelector, createContext } from "use-context-selector";
-import { useScrollRef } from "..";
+import { MotionValue, useSpring, useMotionValue } from "framer-motion";
 
 type CursorContextType = {
-  cursorPosition: [number, number];
-  cursorPositionRef: Vector2;
-  isContext: boolean;
+  cursorX: MotionValue<any>;
+  cursorY: MotionValue<any>;
+  cursorRef: Vector2;
 };
 const defaultCursorContext: CursorContextType = {
-  cursorPosition: [0, 0],
-  cursorPositionRef: new Vector2(0, 0),
-  isContext: false,
+  cursorX: undefined as any,
+  cursorY: undefined as any,
+  cursorRef: undefined as any,
 };
 const CursorContext = createContext(defaultCursorContext);
 
 const CursorProvider = (props: { children?: ReactNode }) => {
   const { children } = props;
-  const cursorPositionRef = useRef(new Vector2()).current;
 
-  const [cursorPosition, setCursorPosition] = useState<[number, number]>([
-    0, 0,
-  ]);
-  const scrollRef = useScrollRef();
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
+  const cursorRef = useRef(new Vector2()).current;
 
+  //ref listeners
+  useEffect(() => {
+    cursorX.onChange((x) => cursorRef.setX(x));
+    cursorY.onChange((y) => cursorRef.setY(y));
+  }, []);
+
+  //listen for mousemoves
   useEffect(() => {
     const listener = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY + scrollRef.y;
+      const x = e.pageX;
+      const y = e.pageY;
 
-      cursorPositionRef.set(x, y);
-      setCursorPosition([x, y]);
+      cursorX.set(x);
+      cursorY.set(y);
     };
     document.addEventListener("mousemove", listener);
     return () => {
@@ -40,23 +45,47 @@ const CursorProvider = (props: { children?: ReactNode }) => {
 
   return (
     <CursorContext.Provider
-      value={{ cursorPosition, cursorPositionRef, isContext: true }}
+      value={{
+        cursorX,
+        cursorY,
+        cursorRef,
+      }}
     >
       {children}
     </CursorContext.Provider>
   );
 };
 
-const useCursorPosition = () =>
-  useContextSelector(CursorContext, (c) => c.cursorPosition);
+const useCursor = () =>
+  useContextSelector(CursorContext, (c) => ({ x: c.cursorX, y: c.cursorY }));
+const useCursorRef = () =>
+  useContextSelector(CursorContext, (c) => c.cursorRef);
+const useCursorSpring = (springOptions?: Parameters<typeof useSpring>[1]) => {
+  const cursor = useCursor();
+  const x = useSpring(cursor.x, springOptions);
+  const y = useSpring(cursor.y, springOptions);
+  return { x, y };
+};
+const useCursorSpringRef = (
+  springOptions?: Parameters<typeof useSpring>[1]
+) => {
+  const cursor = useCursorSpring(springOptions);
+  const ref = useRef<Vector2>(new Vector2()).current;
 
-const useCursorPositionRef = () =>
-  useContextSelector(CursorContext, (c) => c.cursorPositionRef);
+  useEffect(() => {
+    cursor.x.onChange((x) => ref.setX(x));
+    cursor.y.onChange((y) => ref.setY(y));
+  }, [cursor.x, cursor.y]);
+
+  return ref;
+};
 
 export {
   CursorContext,
   CursorContextType,
-  useCursorPosition,
-  useCursorPositionRef,
+  useCursor,
+  useCursorRef,
+  useCursorSpring,
+  useCursorSpringRef,
   CursorProvider,
 };

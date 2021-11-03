@@ -2,6 +2,7 @@ uniform float time;
 uniform float seed;
 uniform vec2 resolution;
 uniform vec2 cursor;
+uniform vec2 cursorSpring;
 uniform vec2 scroll;
 uniform float transition;
 
@@ -28,7 +29,7 @@ float map(vec3 p){
     return length(p+vec3(sin(time*0.7)))*log(length(p)+1.) + sin(q.x+sin(q.z+sin(q.y)))*0.5 - 1.;
 }
 vec3 ether(){	
-	vec2 p = gl_FragCoord.xy/resolution.y - vec2(.9,.5) - cursor.xy/resolution.y*vec2(0.1,-0.1) - vec2(0., scroll.y/resolution.y);
+	vec2 p = gl_FragCoord.xy/resolution.y - vec2(.9,.5) - cursorSpring.xy/resolution.y*vec2(0.1,-0.1) - vec2(0., scroll.y/resolution.y);
 	//p.x = mod(p.x + .5, 1.5) - .75;
 	//p.y = mod(p.y + .5, 1.5) - .75;
 	vec3 cl = vec3(0.);

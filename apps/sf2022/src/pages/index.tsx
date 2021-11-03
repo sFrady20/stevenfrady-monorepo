@@ -15,7 +15,7 @@ import {
   Variants,
 } from "framer-motion";
 import { ReactNode, useEffect, useRef } from "react";
-import { ScrollOutlet, ShaderCanvas } from "base";
+import { ScrollOutlet, ShaderCanvas, useCursorSpringRef } from "base";
 import foregroundFrag from "./foreground.frag.glsl";
 import backgroundFrag from "./background.frag.glsl";
 
@@ -75,6 +75,7 @@ const seed = Math.random() * 100;
 export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
   const { children, ...innerProps } = props;
   const location = useLocation();
+  const cursorSpringRef = useCursorSpringRef({ stiffness: 200, damping: 50 });
 
   const transitionIndex = useRef(-0.5);
   const transitionMotion = useMotionValue(0);
@@ -82,6 +83,7 @@ export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
   const uniforms = useRef({
     seed: { value: seed },
     transition: { value: 0 },
+    cursorSpring: { value: cursorSpringRef },
   }).current;
 
   const onValueUpdate = (val: number) => {

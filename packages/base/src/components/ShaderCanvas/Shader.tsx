@@ -4,7 +4,7 @@ import { ScreenQuad } from "./ScreenQuad";
 import defaultFragmentShader from "./default.frag.glsl";
 import defaultVertexShader from "./default.vert.glsl";
 import _ from "lodash";
-import { useCursorPositionRef, useScrollRef } from "..";
+import { useCursorRef, useScrollRef } from "..";
 
 const ShaderScene = (props: {
   uniforms?: { [s: string]: { value: any } };
@@ -52,15 +52,15 @@ const Shader = (
 ) => {
   const { uniforms, frag, vert, ...innerProps } = props;
 
-  const cursorPositionRef = useCursorPositionRef();
   const scrollRef = useScrollRef();
+  const cursorRef = useCursorRef();
 
   return (
     <Canvas gl={{ alpha: true }} {...innerProps}>
       <ShaderScene
         uniforms={_.merge(uniforms, {
           cursor: {
-            value: cursorPositionRef,
+            value: cursorRef,
           },
           scroll: {
             value: scrollRef,

@@ -6,8 +6,8 @@ import { Vector2 } from "three";
 import { createContext, useContextSelector } from "use-context-selector";
 
 type ScrollContextType = {
-  scrollX: MotionValue<number>;
-  scrollY: MotionValue<number>;
+  scrollX: MotionValue<any>;
+  scrollY: MotionValue<any>;
   scrollRef: Vector2;
 };
 const defaultScrollContext: ScrollContextType = {
@@ -40,7 +40,7 @@ const ScrollProvider = (props: {
   const scrollRef = useRef(new Vector2(0, 0)).current;
 
   useEffect(() => {
-    scrollX.onChange(scrollRef.setX);
+    scrollX.onChange((x) => scrollRef.setX(x));
     scrollY.onChange((y) => scrollRef.setY(y));
   }, []);
 
