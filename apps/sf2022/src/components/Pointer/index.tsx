@@ -1,5 +1,4 @@
-import { useCursor, useCursorSpring } from "base";
-import { motion } from "framer-motion";
+import { useCursor, useCursorSpring, motion } from "base";
 
 const Pointer = () => {
   const cursor = useCursor();

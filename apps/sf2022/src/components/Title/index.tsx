@@ -13,14 +13,14 @@ const Title = () => {
         </filter>
       </svg>
 
-      <h1
+      <h2
         className="text-size-9rem text-gray-50 font-extrabold relative cursor-default"
         style={{ filter: "url(#outliner)" }}
       >
         CREATIVE
         <br />
         DEVELOPER
-      </h1>
+      </h2>
     </>
   );
 };

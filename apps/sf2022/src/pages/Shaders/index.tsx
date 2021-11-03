@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "base";
 import { Link } from "react-router-dom";
 import { pageVariants } from "..";
 
