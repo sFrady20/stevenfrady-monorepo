@@ -1,18 +1,25 @@
-import { motion } from "base";
-import { pageVariants } from "..";
 import { Link } from "react-router-dom";
 import Title from "../../components/Title";
 
 const HomePage = () => {
   return (
-    <div className="container mx-auto mx-8 text-center min-h-screen flex flex-col justify-center">
-      <h1 className="mb-8 uppercase text-size-12px">Steven Frady</h1>
+    <div className="text-center w-full min-h-screen flex flex-col justify-center">
       <Title />
-      <motion.div variants={pageVariants("opacity")} className="space-x-4 mt-4">
-        <Link to="/shaders">Projects</Link>
-        <Link to="/shaders">Experiments</Link>
-        <Link to="/shaders">Updates</Link>
-      </motion.div>
+      <div className="text-size-12px flex justify-center items-center space-x-5 pt-10">
+        <h1>Steven Frady</h1>
+        <span className="h-1 w-1 bg-white rounded-full" />
+        <div>Under Construction</div>
+        <span className="h-1 w-1 bg-white rounded-full" />
+        <a href="mailto:sfrady20@gmail.com">sfrady20@gmail.com</a>
+        <span className="h-1 w-1 bg-white rounded-full" />
+        <a href="https://www.linkedin.com/in/stevenfrady/" target="_blank">
+          LinkedIn
+        </a>
+        <span className="h-1 w-1 bg-white rounded-full" />
+        <a href="https://github.com/sFrady20" target="_blank">
+          GitHub
+        </a>
+      </div>
     </div>
   );
 };
