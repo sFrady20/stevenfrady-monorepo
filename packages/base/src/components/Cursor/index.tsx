@@ -80,9 +80,9 @@ const useCursorSpringRef = (
   return ref;
 };
 
+export type { CursorContextType };
 export {
   CursorContext,
-  CursorContextType,
   useCursor,
   useCursorRef,
   useCursorSpring,

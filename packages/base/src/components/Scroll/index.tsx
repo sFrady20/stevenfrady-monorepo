@@ -1,6 +1,6 @@
 import { motion, MotionValue, useSpring } from "framer-motion";
 import { merge } from "lodash";
-import React, { ReactNode, useEffect, useMemo, useRef } from "react";
+import { ReactNode, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Vector2 } from "three";
 import { createContext, useContextSelector } from "use-context-selector";
@@ -51,6 +51,7 @@ const ScrollProvider = (props: {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const adjust = () => {
+    if (!containerRef.current || !root) return;
     root.style.height = `${containerRef.current.clientHeight - 1}px`;
   };
 
@@ -63,10 +64,10 @@ const ScrollProvider = (props: {
     const listener = (e: Event) => {
       adjust();
     };
-    observer.observe(containerRef.current);
+    containerRef.current && observer.observe(containerRef.current);
     window.addEventListener("resize", listener);
     return () => {
-      observer.unobserve(containerRef.current);
+      containerRef.current && observer.unobserve(containerRef.current);
       window.removeEventListener("resize", listener);
     };
   }, []);
@@ -117,14 +118,8 @@ const useScrollRef = () =>
 const ScrollOutlet = (props: { children?: ReactNode }) => {
   const { children } = props;
   const root = useMemo(() => document.querySelector("#root"), []);
-  return createPortal(children, root);
+  return createPortal(children, root!);
 };
 
-export {
-  ScrollContextType,
-  ScrollContext,
-  ScrollProvider,
-  ScrollOutlet,
-  useScroll,
-  useScrollRef,
-};
+export type { ScrollContextType };
+export { ScrollContext, ScrollProvider, ScrollOutlet, useScroll, useScrollRef };
