@@ -43,8 +43,8 @@ const makeSpring = (source: ReturnType<typeof useCursor>, depth: number) => {
     return y.get();
   });
 
-  source.x.onChange((o) => x.set(-1 * o * 0.022 * (1 - depth)));
-  source.y.onChange((o) => y.set(-1 * o * 0.022 * (1 - depth)));
+  source.x.onChange((o) => x.set(-1 * o * 0.015 * (1 - depth)));
+  source.y.onChange((o) => y.set(-1 * o * 0.015 * (1 - depth)));
 
   return { x, y };
 };
@@ -86,7 +86,7 @@ const Title = () => {
       </svg>
 
       <motion.h2
-        className="text-size-9rem text-gray-50 font-extrabold relative cursor-default"
+        className="text-size-9rem text-gray-50 font-extrabold relative cursor-default m-0"
         style={{
           filter: `url(#${OUTLINES})`,
         }}
