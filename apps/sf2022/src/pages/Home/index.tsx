@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Title from "../../components/Title";
 
 const HomePage = () => {
@@ -10,13 +9,26 @@ const HomePage = () => {
         <span className="h-1 w-1 bg-white rounded-full" />
         <div>Under Construction</div>
         <span className="h-1 w-1 bg-white rounded-full" />
-        <a href="mailto:sfrady20@gmail.com">sfrady20@gmail.com</a>
+        <a
+          className="opacity-50 hover:opacity-100 hover:underline transition"
+          href="mailto:sfrady20@gmail.com"
+        >
+          sfrady20@gmail.com
+        </a>
         <span className="h-1 w-1 bg-white rounded-full" />
-        <a href="https://www.linkedin.com/in/stevenfrady/" target="_blank">
+        <a
+          className="opacity-50 hover:opacity-100 hover:underline transition"
+          href="https://www.linkedin.com/in/stevenfrady/"
+          target="_blank"
+        >
           LinkedIn
         </a>
         <span className="h-1 w-1 bg-white rounded-full" />
-        <a href="https://github.com/sFrady20" target="_blank">
+        <a
+          className="opacity-50 hover:opacity-100 hover:underline transition"
+          href="https://github.com/sFrady20"
+          target="_blank"
+        >
           GitHub
         </a>
       </div>
