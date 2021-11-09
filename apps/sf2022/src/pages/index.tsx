@@ -5,6 +5,7 @@ import {
   useLocation,
   RouteProps,
 } from "react-router-dom";
+import { ScrollOutlet, ShaderCanvas, useCursorSpringRef } from "base";
 import {
   animate,
   AnimatePresence,
@@ -13,9 +14,8 @@ import {
   usePresence,
   Variant,
   Variants,
-} from "framer-motion";
+} from "base";
 import { ReactNode, useEffect, useRef } from "react";
-import { ScrollOutlet, ShaderCanvas, useCursorSpringRef } from "base";
 import foregroundFrag from "./foreground.frag.glsl";
 import backgroundFrag from "./background.frag.glsl";
 

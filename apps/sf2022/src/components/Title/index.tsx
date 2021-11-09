@@ -1,11 +1,6 @@
 import { useCursor } from "base";
+import { motion, MotionValue, animate, AnimationPlaybackControls } from "base";
 import { map } from "lodash";
-import {
-  motion,
-  MotionValue,
-  animate,
-  AnimationPlaybackControls,
-} from "framer-motion";
 import { useMemo } from "react";
 
 const OUTLINES = "outlines";

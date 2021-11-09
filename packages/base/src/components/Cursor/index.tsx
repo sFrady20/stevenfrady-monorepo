@@ -52,7 +52,7 @@ const CursorProvider = (props: { children?: ReactNode }) => {
       cursorDown.set(1);
     };
     const upListener = (e: MouseEvent) => {
-      cursorDown.set(1);
+      cursorDown.set(0);
     };
     document.addEventListener("mousedown", downListener);
     document.addEventListener("mouseup", upListener);
