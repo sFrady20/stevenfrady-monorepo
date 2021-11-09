@@ -1,7 +1,8 @@
-import { useCursor, useCursorSpring, motion } from "base";
+import { useCursor, useCursorSpring, motion, useCursorDown } from "base";
 
 const Pointer = () => {
   const cursor = useCursor();
+  const cursorDown = useCursorDown();
   const cursorSpring = useCursorSpring({ stiffness: 700, damping: 45 });
 
   return (

@@ -6,6 +6,9 @@ uniform vec2 cursorSpring;
 uniform vec2 scroll;
 uniform float transition;
 
+vec3 bubbleBaseCol = vec3(0.1,0.4,.2);
+vec3 bubbleHighlightCol = vec3(5., 2.5, 3.);
+
 float rand(vec2 n) { 
 	return fract(sin(dot(n, vec2(132.9898, 34.1414))) * (43758.5453 + floor(transition + 0.5) + seed * 0.74235));
 }
@@ -23,22 +26,37 @@ float noise(vec2 p){
 
 //bubbles
 mat2 m(float a){float c=cos(a), s=sin(a);return mat2(c,-s,s,c);}
+
 float map(vec3 p){
     p.xz*= m(time*0.4);p.xy*= m(time*0.3);
     vec3 q = p*1.+time;
     return length(p+vec3(sin(time*0.7)))*log(length(p)+1.) + sin(q.x+sin(q.z+sin(q.y)))*0.5 - 1.;
 }
-vec3 ether(){	
-	vec2 p = gl_FragCoord.xy/resolution.y - vec2(.9,.5) - cursorSpring.xy/resolution.y*vec2(0.1,-0.1) - vec2(0., scroll.y/resolution.y);
-	//p.x = mod(p.x + .5, 1.5) - .75;
-	//p.y = mod(p.y + .5, 1.5) - .75;
+
+vec3 etherLayer(vec2 p) {
+	//scrolling
+	p -= vec2(0., scroll.y);
+	//mouse movement
+	p -= cursorSpring.xy*vec2(0.1,-0.1);
+
+	//uv
+	p /= resolution.xy;
+
+	//transform
+	p -= vec2(0.5, 0.5);
+	//scale
+	p *= 2.;
+
+	//rectify
+	p.y *= resolution.y/resolution.x;
+
 	vec3 cl = vec3(0.);
 	float d = 2.5;
 	for(int i=0; i<=5; i++)	{
 		vec3 p = vec3(0,0,5.) + normalize(vec3(p, -1.))*d;
     float rz = map(p);
 		float f = clamp((rz - map(p+.1))*0.5, -.1, 1. );
-    vec3 l = vec3(0.1,0.4,.2) + vec3(5., 2.5, 3.)*f;
+    vec3 l = bubbleBaseCol + bubbleHighlightCol*f;
     cl = cl*l + smoothstep(2.5, .0, rz)*.7*l;
 		d += min(rz, 1.);
 	}
@@ -59,7 +77,7 @@ void main() {
 	a += m;
 
 	//ether
-	vec3 e = ether();
+	vec3 e = etherLayer(p);
 	col = mix(col, e, length(e));
 	a += length(e);
 
