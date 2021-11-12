@@ -1,11 +1,15 @@
 import { useCursor } from "base";
 import { motion, MotionValue, animate, AnimationPlaybackControls } from "base";
 import { map } from "lodash";
-import { useMemo } from "react";
+import { RefObject, useMemo, useRef } from "react";
 
 const OUTLINES = "outlines";
 
-const makeSpring = (source: ReturnType<typeof useCursor>, depth: number) => {
+const makeSpring = (
+  source: ReturnType<typeof useCursor>,
+  depth: number,
+  elRef: RefObject<HTMLHeadingElement>
+) => {
   const x = new MotionValue(0);
   let activeXAnimation: AnimationPlaybackControls | undefined = undefined;
   const y = new MotionValue(0);
@@ -38,21 +42,32 @@ const makeSpring = (source: ReturnType<typeof useCursor>, depth: number) => {
     return y.get();
   });
 
-  source.x.onChange((o) => x.set(-1 * o * 0.015 * (1 - depth)));
-  source.y.onChange((o) => y.set(-1 * o * 0.015 * (1 - depth)));
+  const update = () => {
+    let cx = source.x.get();
+    let cy = source.y.get();
+
+    const rect = elRef.current?.getBoundingClientRect();
+    if (rect) {
+      cx += rect.left - rect.width / 2;
+      cy -= rect.bottom - rect.height / 2;
+    }
+
+    x.set(-1 * cx * 0.015 * (1 - depth));
+    y.set(-1 * cy * 0.015 * (1 - depth));
+  };
+
+  source.x.onChange(update);
+  source.y.onChange(update);
 
   return { x, y };
 };
 
 const Title = () => {
   const cursor = useCursor();
+  const elRef = useRef<HTMLHeadingElement>(null);
 
   const springs = useMemo(
-    () => [
-      makeSpring(cursor, 0.25),
-      makeSpring(cursor, 0.5),
-      makeSpring(cursor, 0.75),
-    ],
+    () => map([0.25, 0.5, 0.75], (depth) => makeSpring(cursor, depth, elRef)),
     []
   );
 
@@ -81,7 +96,8 @@ const Title = () => {
       </svg>
 
       <motion.h2
-        className="text-size-9rem text-gray-50 font-extrabold relative cursor-default m-0"
+        ref={elRef}
+        className="text-size-9rem text-gray-50 font-extrabold relative cursor-default m-0 select-none"
         style={{
           filter: `url(#${OUTLINES})`,
         }}
