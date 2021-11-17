@@ -2,7 +2,7 @@ import { motion } from "base";
 import { Link } from "react-router-dom";
 import { pageVariants } from "..";
 
-const ShadersPage = () => {
+const ExperimentsPage = () => {
   return (
     <motion.div
       variants={pageVariants({
@@ -32,4 +32,4 @@ const ShadersPage = () => {
   );
 };
 
-export default ShadersPage;
+export default ExperimentsPage;

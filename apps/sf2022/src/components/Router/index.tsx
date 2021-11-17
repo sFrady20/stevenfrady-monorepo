@@ -1,18 +1,29 @@
 import { BrowserRouter } from "react-router-dom";
 import { PageRoute, PageSwitch } from "../../pages";
 import HomePage from "../../pages/Home";
-import ShadersPage from "../../pages/Shaders";
+import ShadersPage from "../../pages/Experiments";
+import { Route } from "react-router";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <PageSwitch>
-        <PageRoute path="/shaders">
-          <ShadersPage />
-        </PageRoute>
-        <PageRoute path="*">
-          <HomePage />
-        </PageRoute>
+        <Route
+          path="/experiments"
+          element={
+            <PageRoute>
+              <ShadersPage />
+            </PageRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageRoute>
+              <HomePage />
+            </PageRoute>
+          }
+        />
       </PageSwitch>
     </BrowserRouter>
   );

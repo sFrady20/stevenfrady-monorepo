@@ -1,6 +1,6 @@
 import {
-  Switch,
-  SwitchProps,
+  Routes,
+  RoutesProps,
   Route,
   useLocation,
   RouteProps,
@@ -72,7 +72,7 @@ const PageTransition = (props: {
 
 const seed = Math.random() * 100;
 
-export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
+export const PageSwitch = (props: RoutesProps & { children: ReactNode }) => {
   const { children, ...innerProps } = props;
   const location = useLocation();
   const cursorSpringRef = useCursorSpringRef({ stiffness: 200, damping: 50 });
@@ -91,7 +91,7 @@ export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
   };
 
   return (
-    <>
+    <div>
       <ScrollOutlet>
         <div className="fixed left-0 top-0 w-full h-full pointer-events-none z-0">
           <ShaderCanvas uniforms={uniforms} frag={backgroundFrag} />
@@ -133,27 +133,25 @@ export const PageSwitch = (props: SwitchProps & { children: ReactNode }) => {
             });
           }}
         >
-          <Switch {...innerProps} location={location}>
+          <Routes {...innerProps} location={location}>
             {children}
-          </Switch>
+          </Routes>
         </PageTransition>
       </AnimatePresence>
-    </>
+    </div>
   );
 };
 
-export const PageRoute = (props: RouteProps & { children: ReactNode }) => {
+export const PageRoute = (props: { children?: ReactNode }) => {
   const { children, ...innerProps } = props;
 
   return (
-    <Route {...innerProps}>
-      <motion.div
-        className="flex flex-1 justify-center items-center"
-        {...PAGE_VARIANTS}
-        variants={pageVariants()}
-      >
-        {children}
-      </motion.div>
-    </Route>
+    <motion.div
+      className="flex flex-1 justify-center items-center"
+      {...PAGE_VARIANTS}
+      variants={pageVariants()}
+    >
+      {children}
+    </motion.div>
   );
 };
