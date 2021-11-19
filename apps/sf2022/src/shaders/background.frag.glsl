@@ -112,9 +112,9 @@ void main() {
 	a += m;
 
 	//ether
-	vec3 e = etherLayer(p);
-	col = mix(col, e, length(e));
-	a += length(e);
+	// vec3 e = etherLayer(p);
+	// col = mix(col, e, length(e));
+	// a += length(e);
 
 	//footer
 	float f = footer(p);
