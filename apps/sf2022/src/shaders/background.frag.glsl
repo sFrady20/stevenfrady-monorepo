@@ -89,6 +89,11 @@ vec3 etherLayer(vec2 p) {
 	return rCol;
 }
 
+float footer(vec2 p) {
+	float amt = 1. - smoothstep(0., 50., p.y);
+	return amt;
+}
+
 void main() {
 	aspect = vec2(
 		min(resolution.x/resolution.y, 1.),
@@ -110,6 +115,11 @@ void main() {
 	vec3 e = etherLayer(p);
 	col = mix(col, e, length(e));
 	a += length(e);
+
+	//footer
+	float f = footer(p);
+	col = mix(col, vec3(0.09,0.22,0.15)*0.05, f * 0.8);
+	a += f;
 
   gl_FragColor = vec4(col, a);
 }
