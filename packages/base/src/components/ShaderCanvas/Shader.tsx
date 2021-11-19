@@ -3,8 +3,9 @@ import { Canvas, ShaderMaterialProps, useFrame } from "@react-three/fiber";
 import { ScreenQuad } from "./ScreenQuad";
 import defaultFragmentShader from "./default.frag.glsl";
 import defaultVertexShader from "./default.vert.glsl";
-import _ from "lodash";
+import { merge } from "lodash";
 import { useCursorRef, useScrollRef } from "..";
+import { useUniforms } from "../..";
 
 const ShaderScene = (props: {
   uniforms?: { [s: string]: { value: any } };
@@ -16,7 +17,7 @@ const ShaderScene = (props: {
   const ref = React.useRef<ShaderMaterialProps>(null);
   useFrame((state) => {
     if (ref.current?.uniforms) {
-      _.merge(ref.current.uniforms, {
+      merge(ref.current.uniforms, {
         time: {
           value: state.clock.elapsedTime,
         },
@@ -50,25 +51,23 @@ const Shader = (
     uniforms?: { [s: string]: { value: any } };
   } & RefAttributes<HTMLCanvasElement>
 ) => {
-  const { uniforms, frag, vert, ...innerProps } = props;
+  const { uniforms: propUniforms, frag, vert, ...innerProps } = props;
 
   const scrollRef = useScrollRef();
   const cursorRef = useCursorRef();
 
+  const uniforms = useUniforms({
+    cursor: {
+      value: cursorRef,
+    },
+    scroll: {
+      value: scrollRef,
+    },
+  });
+
   return (
     <Canvas gl={{ alpha: true }} {...innerProps}>
-      <ShaderScene
-        uniforms={_.merge(uniforms, {
-          cursor: {
-            value: cursorRef,
-          },
-          scroll: {
-            value: scrollRef,
-          },
-        })}
-        frag={frag}
-        vert={vert}
-      />
+      <ShaderScene uniforms={uniforms} frag={frag} vert={vert} />
     </Canvas>
   );
 };

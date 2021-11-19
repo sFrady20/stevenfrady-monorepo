@@ -1,11 +1,4 @@
-import {
-  Routes,
-  RoutesProps,
-  Route,
-  useLocation,
-  RouteProps,
-} from "react-router-dom";
-import { ScrollOutlet, ShaderCanvas, useCursorSpringRef } from "base";
+import { Routes, RoutesProps, useLocation } from "react-router-dom";
 import {
   animate,
   AnimatePresence,
@@ -14,10 +7,10 @@ import {
   usePresence,
   Variant,
   Variants,
+  useUniforms,
 } from "base";
 import { ReactNode, useEffect, useRef } from "react";
-import foregroundFrag from "./foreground.frag.glsl";
-import backgroundFrag from "./background.frag.glsl";
+import ShaderLayers from "@/components/ShaderLayers";
 
 export const PAGE_VARIANTS = {
   initial: "pageInit",
@@ -70,37 +63,23 @@ const PageTransition = (props: {
   return <>{children}</>;
 };
 
-const seed = Math.random() * 100;
-
 export const PageSwitch = (props: RoutesProps & { children: ReactNode }) => {
   const { children, ...innerProps } = props;
   const location = useLocation();
-  const cursorSpringRef = useCursorSpringRef({ stiffness: 200, damping: 50 });
 
   const transitionIndex = useRef(-0.5);
   const transitionMotion = useMotionValue(0);
 
-  const uniforms = useRef({
-    seed: { value: seed },
+  const uniforms = useUniforms({
     transition: { value: 0 },
-    cursorSpring: { value: cursorSpringRef },
-  }).current;
+  });
 
   const onValueUpdate = (val: number) => {
     uniforms.transition.value = val;
   };
 
   return (
-    <div>
-      <ScrollOutlet>
-        <div className="fixed left-0 top-0 w-full h-full pointer-events-none z-0">
-          <ShaderCanvas uniforms={uniforms} frag={backgroundFrag} />
-        </div>
-        <div className="fixed left-0 top-0 w-full h-full pointer-events-none z-50">
-          <ShaderCanvas uniforms={uniforms} frag={foregroundFrag} />
-        </div>
-      </ScrollOutlet>
-
+    <ShaderLayers uniforms={uniforms}>
       <AnimatePresence exitBeforeEnter initial={false}>
         <PageTransition
           key={location.pathname}
@@ -138,16 +117,16 @@ export const PageSwitch = (props: RoutesProps & { children: ReactNode }) => {
           </Routes>
         </PageTransition>
       </AnimatePresence>
-    </div>
+    </ShaderLayers>
   );
 };
 
 export const PageRoute = (props: { children?: ReactNode }) => {
-  const { children, ...innerProps } = props;
+  const { children } = props;
 
   return (
     <motion.div
-      className="flex flex-1 justify-center items-center"
+      className="flex flex-1 justify-center items-center min-h-100vh"
       {...PAGE_VARIANTS}
       variants={pageVariants()}
     >

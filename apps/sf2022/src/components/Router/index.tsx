@@ -1,8 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
-import { PageRoute, PageSwitch } from "../../pages";
-import HomePage from "../../pages/Home";
-import ShadersPage from "../../pages/Experiments";
+import { PageRoute, PageSwitch } from "@/components/Pages";
+import HomePage from "@/pages/Home";
+import ShadersPage from "@/pages/Experiments";
 import { Route } from "react-router";
+import BottomBar from "../BottomBar";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
           }
         />
       </PageSwitch>
+      <BottomBar />
     </BrowserRouter>
   );
 };

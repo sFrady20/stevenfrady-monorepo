@@ -1,4 +1,4 @@
-import { CursorProvider, ScrollProvider } from "base";
+import { CursorProvider, ScrollProvider, UniformsProvider } from "base";
 import React from "react";
 import ReactDOM from "react-dom";
 import Pointer from "./components/Pointer";
@@ -10,8 +10,10 @@ ReactDOM.render(
   <React.StrictMode>
     <ScrollProvider>
       <CursorProvider>
-        <Pointer />
-        <Router />
+        <UniformsProvider>
+          <Pointer />
+          <Router />
+        </UniformsProvider>
       </CursorProvider>
     </ScrollProvider>
   </React.StrictMode>,

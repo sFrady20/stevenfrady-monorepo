@@ -1,6 +1,6 @@
 import { motion } from "base";
 import { Link } from "react-router-dom";
-import { pageVariants } from "..";
+import { pageVariants } from "@/components/Pages";
 
 const ExperimentsPage = () => {
   return (

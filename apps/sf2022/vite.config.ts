@@ -12,7 +12,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      base: resolve(__dirname, "../../packages/base/src"),
+      "@": resolve(process.cwd(), "./src"),
+      base: resolve(process.cwd(), "../../packages/base/src"),
     },
   },
 });
