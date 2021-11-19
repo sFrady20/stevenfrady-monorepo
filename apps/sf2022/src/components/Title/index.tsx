@@ -1,9 +1,7 @@
 import { useCursor } from "base";
 import { motion, MotionValue, animate, AnimationPlaybackControls } from "base";
-import { map } from "lodash";
+import { map, uniqueId } from "lodash";
 import { RefObject, useMemo, useRef } from "react";
-
-const OUTLINES = "outlines";
 
 const makeSpring = (
   source: ReturnType<typeof useCursor>,
@@ -71,6 +69,13 @@ const Title = () => {
     []
   );
 
+  const g: { [s: string]: string } = {};
+  const rg = (key: string) => {
+    const curId = g[key] || uniqueId("g-");
+    g[key] = uniqueId("g-");
+    return curId;
+  };
+
   return (
     <>
       <svg
@@ -79,27 +84,59 @@ const Title = () => {
           top: -99999,
         }}
       >
-        <filter id={OUTLINES} filterUnits="objectBoundingBox">
-          <feMorphology operator="dilate" radius="3" in="SourceGraphic" />
-          <feComposite operator="out" in2="SourceGraphic" result="composite" />
-          {map(springs, (s, i) => (
-            <motion.feDropShadow
-              key={i}
-              dx={s.x}
-              dy={s.y}
-              stdDeviation={Math.pow(5, 1 - i / springs.length)}
-              floodColor={`rgba(255,255,255,${0 + (i / springs.length) * 0.4})`}
+        <defs>
+          <filter id="ghost">
+            <feFlood floodColor="#000" result="bg" />
+
+            {map([springs[2]], (s, i) => (
+              <>
+                <feFlood flood-color="#fff" />
+                <feComposite in2="SourceGraphic" operator="out" />
+                <motion.feOffset key={i} dx={s.x} dy={s.y} />
+                <feGaussianBlur stdDeviation={10} />
+              </>
+            ))}
+
+            <feMerge result="merge">
+              <feMergeNode in="bg" />
+              <feMergeNode />
+            </feMerge>
+
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 1 0  0 0 0 1 0  0 0 0 1 0  0.13 0.13 0.13 0 0"
             />
-          ))}
-          <feGaussianBlur stdDeviation={0.5} />
-        </filter>
+
+            <feComposite in2="SourceGraphic" operator="in" result="cut" />
+
+            <feMorphology operator="dilate" radius="3" in="SourceGraphic" />
+            <feComposite operator="out" in2="SourceGraphic" result="outlines" />
+            <feMerge>
+              <feMergeNode in="cut" />
+              <feMergeNode />
+            </feMerge>
+
+            {map(springs, (s, i) => (
+              <motion.feDropShadow
+                key={i}
+                dx={s.x}
+                dy={s.y}
+                stdDeviation={Math.pow(10, 1 - i / springs.length)}
+                floodColor={`rgba(255,255,255,${
+                  0 + (i / springs.length) * 0.4
+                })`}
+              />
+            ))}
+            <feGaussianBlur stdDeviation={0.5} />
+          </filter>
+        </defs>
       </svg>
 
       <motion.h2
         ref={elRef}
         className="text-size-9rem text-gray-50 font-extrabold relative cursor-default m-0 select-none"
         style={{
-          filter: `url(#${OUTLINES})`,
+          filter: `url(#ghost)`,
         }}
       >
         CREATIVE
