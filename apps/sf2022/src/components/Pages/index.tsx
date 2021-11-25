@@ -126,7 +126,7 @@ export const PageRoute = (props: { children?: ReactNode }) => {
 
   return (
     <motion.div
-      className="flex flex-1 justify-center items-center min-h-100vh"
+      className="flex flex-1 flex-col justify-center items-center min-h-100vh"
       {...PAGE_VARIANTS}
       variants={pageVariants()}
     >

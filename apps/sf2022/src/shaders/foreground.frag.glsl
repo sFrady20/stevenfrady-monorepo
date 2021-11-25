@@ -25,7 +25,7 @@ float noise(vec2 p){
 
 
 void main() {
-  vec2 p = gl_FragCoord.xy - scroll;
+  vec2 p = gl_FragCoord.xy - scroll * 1.2;
 	p.y = resolution.y - p.y;
 
   vec2 uv = gl_FragCoord.xy / resolution.xy;
