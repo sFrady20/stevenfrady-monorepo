@@ -39,9 +39,8 @@ void main() {
 	a = max(a, n);
 
 	//fade
-	float f = uv.x * 0.25 + transition;
-	f = mod( f, 1.);
-	f = smoothstep(0.25,0.5,f) * (1. - smoothstep(0.75,1.,f));
+	float f = uv.x + mod(transition + 2., 2.);
+	f = smoothstep(1.,1.5,f) * (1. - smoothstep(2.,3.,f));
 	col = mix(col, vec3(0.), f);
 	a += f;
 

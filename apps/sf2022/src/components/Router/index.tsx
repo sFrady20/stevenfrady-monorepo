@@ -1,33 +1,33 @@
 import { BrowserRouter } from "react-router-dom";
-import { PageRoute, PageSwitch } from "@/components/Pages";
 import HomePage from "@/pages/Home";
 import ShadersPage from "@/pages/Experiments";
-import { Route } from "react-router";
+import { Route, Routes } from "react-router";
 import BottomBar from "../BottomBar";
+import ShaderLayers from "../ShaderLayers";
+import PageTransition from "../PageTransition";
+import { useLocation } from "react-router";
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <PageSwitch>
-        <Route
-          path="/experiments"
-          element={
-            <PageRoute>
-              <ShadersPage />
-            </PageRoute>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <PageRoute>
-              <HomePage />
-            </PageRoute>
-          }
-        />
-      </PageSwitch>
-      <BottomBar />
+      <ShaderLayers>
+        <PageTransition>
+          <RT />
+          <BottomBar />
+        </PageTransition>
+      </ShaderLayers>
     </BrowserRouter>
+  );
+};
+
+const RT = () => {
+  const location = useLocation();
+
+  return (
+    <Routes location={location}>
+      <Route path="/experiments" element={<ShadersPage />} />
+      <Route path="*" element={<HomePage />} />
+    </Routes>
   );
 };
 
