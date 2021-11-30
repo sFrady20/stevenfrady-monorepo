@@ -1,0 +1,35 @@
+{
+  "name": "cause",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^7.0.17",
+    "base": "workspace:packages/base",
+    "lodash": "^4.17.21",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "sass": "^1.42.1",
+    "three": "^0.133.1",
+    "use-context-selector": "^1.3.9",
+    "vite-plugin-glsl": "^0.0.4",
+    "vite-plugin-windicss": "^1.4.9",
+    "windicss": "^3.1.9"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.175",
+    "@types/node": "^16.11.6",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router": "^5.1.17",
+    "@types/react-router-dom": "^5.3.2",
+    "@vitejs/plugin-react": "^1.0.0",
+    "react-router": "^6.0.2",
+    "react-router-dom": "^6.0.2",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.0"
+  }
+}
