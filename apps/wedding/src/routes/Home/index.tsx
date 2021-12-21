@@ -1,23 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useScroll, useUniforms } from "base";
+import { useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const HomePage = () => {
+  const { x, y } = useScroll();
+
+  const uniforms = useUniforms({
+    leftPanePresence: {
+      value: y.get(),
+    },
+  });
+
+  const openness = useTransform(y, (y) => {
+    let openness = 0;
+    openness = y < window.innerHeight / 2 ? 0 : 1;
+    return openness;
+  });
+
+  const opennessSpring = useSpring(openness);
+
+  useTransform(opennessSpring, (y) => {
+    uniforms.leftPanePresence.value = y;
+    console.log(uniforms.leftPanePresence.value);
+  });
+
   return (
     <>
       <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
-        <div className="flex flex-col items-center">
-          <h1 className="text-size-200px">Ariana & Steven</h1>
-          <div className="flex space-x-12 text-size-24px">
+        <div className="flex flex-col">
+          <h1 className="text-size-120px">Ariana & Steven</h1>
+          <div className="flex space-x-8 text-size-20px items-center">
             <h3>September 16th, 2022</h3>
-            <span>•</span>
+            <span className="flex-1 h-1px bg-black" />
             <h3>Savannah, Georgia</h3>
           </div>
         </div>
       </div>
-      {/* <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
-      <div className="p-40px bg-white shadow-dark-700">
-        
-      </div>
-    </div> */}
+      <div className="min-h-screen min-w-screen flex flex-col justify-center items-center"></div>
     </>
   );
 };

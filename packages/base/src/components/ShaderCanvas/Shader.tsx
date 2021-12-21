@@ -16,6 +16,10 @@ const ShaderScene = (props: {
 
   const ref = React.useRef<ShaderMaterialProps>(null);
   useFrame((state) => {
+    console.log([
+      state.viewport.width * state.viewport.factor,
+      state.viewport.height * state.viewport.factor,
+    ]);
     if (ref.current?.uniforms) {
       merge(ref.current.uniforms, {
         time: {

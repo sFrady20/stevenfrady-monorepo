@@ -1,4 +1,10 @@
-import { motion, MotionValue, useSpring } from "framer-motion";
+import {
+  ForwardRefComponent,
+  HTMLMotionProps,
+  motion,
+  MotionValue,
+  useSpring,
+} from "framer-motion";
 import { merge } from "lodash";
 import { ReactNode, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -17,11 +23,13 @@ const defaultScrollContext: ScrollContextType = {
 };
 const ScrollContext = createContext(defaultScrollContext);
 
-const ScrollProvider = (props: {
-  children?: ReactNode;
-  springOptions?: Parameters<typeof useSpring>[1];
-}) => {
-  const { children, springOptions } = props;
+const ScrollProvider = (
+  props: HTMLMotionProps<"div"> & {
+    children?: ReactNode;
+    springOptions?: Parameters<typeof useSpring>[1];
+  }
+) => {
+  const { children, springOptions, ...rest } = props;
 
   const opts = useMemo(
     () =>
@@ -103,6 +111,7 @@ const ScrollProvider = (props: {
           x: scrollX,
           y: scrollY,
         }}
+        {...rest}
       >
         {children}
       </motion.div>
