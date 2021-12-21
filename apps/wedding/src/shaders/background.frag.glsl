@@ -18,6 +18,11 @@ uniform float rightPanePresence;
 #define SPLASH_COLOR_2 vec4(0.6,0.6,0.6,1.)
 #define LINKS_COLOR_1 vec4(1.,0.5,0.5,1.)
 #define LINKS_COLOR_2 vec4(0.5,0.5,1.,1.)
+#define RSVP_COLOR_1 vec4(.05,0.0,0.1,1.)
+#define RSVP_COLOR_2 vec4(.2,.25,.4,1.)
+
+//TODO: fireworks at bottom
+//https://www.shadertoy.com/view/lscGRl
 
 float random(in vec2 st) {
     return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
@@ -72,10 +77,13 @@ void marble (inout vec4 col,inout vec2 pos) {
     float marbleVal = pattern(scaledMarblePos);
     vec2 scrollUv = scroll.xy / resolution.xy;
 
-    vec4 splashCol = mix (SPLASH_COLOR_1, SPLASH_COLOR_2, pow(marbleVal, 3.));
-    vec4 linksCol = mix (LINKS_COLOR_1, LINKS_COLOR_2, marbleVal);
+    col = mix (SPLASH_COLOR_1, SPLASH_COLOR_2, pow(marbleVal, 3.));
 
-    col = mix (splashCol, linksCol, smoothstep(1.,1.5, scrollUv.y + 0.5 + marbleVal));
+    vec4 linksCol = mix (LINKS_COLOR_1, LINKS_COLOR_2, pow(marbleVal, 1.));
+    col = mix (col, linksCol, smoothstep(0.5,1.,scrollUv.y + marbleVal));
+
+    vec4 rsvpCol = mix (RSVP_COLOR_1, RSVP_COLOR_2, pow(marbleVal, 2.));
+    col = mix (col, rsvpCol, smoothstep(1.5,2.,scrollUv.y + marbleVal));
 }
 
 void leftPane (inout vec4 col, inout vec2 pos) {

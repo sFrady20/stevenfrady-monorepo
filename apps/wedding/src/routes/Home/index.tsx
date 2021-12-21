@@ -30,12 +30,13 @@ const HomePage = () => {
         <div className="flex flex-col">
           <h1 className="text-size-120px">Ariana & Steven</h1>
           <div className="flex space-x-8 text-size-20px items-center">
-            <h3>September 16th, 2022</h3>
+            <h3>September 18th, 2022</h3>
             <span className="flex-1 h-1px bg-black" />
             <h3>Savannah, Georgia</h3>
           </div>
         </div>
       </div>
+      <div className="min-h-screen min-w-screen flex flex-col justify-center items-center"></div>
       <div className="min-h-screen min-w-screen flex flex-col justify-center items-center"></div>
     </>
   );
