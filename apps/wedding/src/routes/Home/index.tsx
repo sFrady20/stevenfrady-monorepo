@@ -37,7 +37,21 @@ const HomePage = () => {
         </div>
       </div>
       <div className="min-h-screen min-w-screen flex flex-col justify-center items-center"></div>
-      <div className="min-h-screen min-w-screen flex flex-col justify-center items-center"></div>
+      <div className="min-h-screen min-w-screen flex flex-col justify-end items-center">
+        <div className="container border-t-1 border-white mx-auto p-4 flex flex-row space-x-6 text-white items-center">
+          <h1 className="text-size-32px">A&S</h1>
+          <div className="text-size-sm">September 18th, 2022</div>
+          <div className="text-size-sm">700 Drayton St Savannah, GA 31401</div>
+          <div className="flex-1"></div>
+          <div className="opacity-30">
+            ©{" "}
+            <a href="http://stevenfrady.com" target="_blank">
+              Steven Frady
+            </a>{" "}
+            2022
+          </div>
+        </div>
+      </div>
     </>
   );
 };
