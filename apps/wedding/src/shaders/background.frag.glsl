@@ -103,12 +103,25 @@ void limit (inout vec4 col, inout vec2 pos) {
     col = mix(PANE_COLOR, col, 1. - step(0.9, (pos.y + scroll.y) / resolution.y));
 }
 
+void magnifyingGlass (inout vec4 col, inout vec2 pos) {
+  float dx = (cursor.x - gl_FragCoord.x) / resolution.x;
+  float dy = (resolution.y - cursor.y - gl_FragCoord.y) / resolution.x;
+  
+  float effect = pow(clamp( 1. - sqrt(pow(dx, 2.) + pow(dy, 2.)) * 3., .0, 1.), 0.3);
+
+  pos.x += dx * effect * 100.;
+  pos.y += dy * effect * 100.;
+  
+  //col = vec4(effect, effect, effect, 1.);
+}
+
 void main() {
 
     vec4 col = vec4(0.,0.,0.,1.);
     vec2 pos = gl_FragCoord.xy - scroll.xy;
 
     leftPane(col, pos);
+    magnifyingGlass(col,pos);
     marble(col, pos);
     //limit(col, pos);
     
