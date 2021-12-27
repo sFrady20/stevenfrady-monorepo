@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useScroll, useUniforms } from "base";
-import { useMotionValue, useSpring, useTransform } from "framer-motion";
-import RsvpForm from "~/components/rsvpForm";
+import { useSpring, useTransform } from "framer-motion";
+import RsvpForm from "~/components/RsvpForm";
 
 const HomePage = () => {
   const { x, y } = useScroll();
@@ -28,7 +28,7 @@ const HomePage = () => {
     <>
       <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
         <div className="flex flex-col">
-          <h1 className="text-size-120px" >Ariana & Steven</h1>
+          <h1 className="text-size-120px">Ariana & Steven</h1>
           <div className="flex space-x-8 text-size-20px items-center">
             <h3>September 18th, 2022</h3>
             <span className="flex-1 h-1px bg-black" />
