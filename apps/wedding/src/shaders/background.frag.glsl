@@ -107,7 +107,7 @@ void magnifyingGlass (inout vec4 col, inout vec2 pos) {
   float dx = (cursor.x - gl_FragCoord.x) / resolution.x;
   float dy = (resolution.y - cursor.y - gl_FragCoord.y) / resolution.x;
   
-  float effect = pow(clamp( 1. - sqrt(pow(dx, 2.) + pow(dy, 2.)) * 3., .0, 1.), 0.3);
+  float effect = pow(clamp( 1. - sqrt(pow(dx, 2.) + pow(dy, 2.)) * 10., .0, 1.), 0.1);
 
   pos.x += dx * effect * 100.;
   pos.y += dy * effect * 100.;

@@ -35,8 +35,8 @@ const CursorProvider = (props: { children?: ReactNode }) => {
   //add movement listeners
   useEffect(() => {
     const listener = (e: MouseEvent) => {
-      const x = e.pageX;
-      const y = e.pageY;
+      const x = e.clientX;
+      const y = e.clientY;
       cursorX.set(x);
       cursorY.set(y);
     };

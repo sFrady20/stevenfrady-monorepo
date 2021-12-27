@@ -1,5 +1,10 @@
 @font-face {
-  font-family: Display;
+  font-family: Sage;
+  /* src: url("/fonts/Harmond-SemiBoldCondensed.otf") format("opentype"); */
+  src: url("/fonts/Sage.otf") format("opentype");
+}
+@font-face {
+  font-family: Harmond;
   src: url("/fonts/Harmond-SemiBoldCondensed.otf") format("opentype");
 }
 @font-face {
@@ -12,7 +17,7 @@
 }
 
 h1 {
-  font-family: Display, sans-serif;
+  font-family: Sage, sans-serif;
 }
 
 body {
