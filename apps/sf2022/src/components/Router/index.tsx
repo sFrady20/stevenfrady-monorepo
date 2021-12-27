@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import HomePage from "@/pages/Home";
-import ShadersPage from "@/pages/Experiments";
+import HomePage from "~/pages/Home";
+import ShadersPage from "~/pages/Experiments";
 import { Route, Routes } from "react-router";
 import BottomBar from "../BottomBar";
 import ShaderLayers from "../ShaderLayers";

@@ -12,7 +12,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": resolve(process.cwd(), "./src"),
+      "~": resolve(process.cwd(), "./src"),
       base: resolve(process.cwd(), "../../packages/base/src"),
     },
   },

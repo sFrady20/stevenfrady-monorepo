@@ -1,4 +1,4 @@
-import { useCursor, useCursorSpring, useCursorDown } from "base";
+import { useCursor, useCursorSpring, useCursorDown, ScrollOutlet } from "base";
 import { motion, useSpring, useTransform } from "base";
 
 const Pointer = () => {
@@ -13,10 +13,10 @@ const Pointer = () => {
   const scaleValue = useTransform(cursorDownSpring, [0, 1], [1, 0.7]);
 
   return (
-    <>
+    <ScrollOutlet>
       <motion.div
         className={
-          "w-1 h-1 absolute rounded-full bg-white transform -translate-x-1/2 -translate-y-1/2 pointer-events-none mix-blend-exclusion z-100"
+          "w-1 h-1 fixed rounded-full bg-white transform -translate-x-1/2 -translate-y-1/2 pointer-events-none mix-blend-exclusion z-100"
         }
         style={{
           left: cursor.x,
@@ -25,7 +25,7 @@ const Pointer = () => {
       />
       <motion.div
         className={
-          "w-7 h-7 absolute rounded-full border-width-2px border-white transform pointer-events-none mix-blend-exclusion z-100"
+          "w-7 h-7 fixed rounded-full border-width-2px border-white transform pointer-events-none mix-blend-exclusion z-100"
         }
         style={{
           left: cursorSpring.x,
@@ -35,7 +35,7 @@ const Pointer = () => {
           translateY: "-50%",
         }}
       />
-    </>
+    </ScrollOutlet>
   );
 };
 

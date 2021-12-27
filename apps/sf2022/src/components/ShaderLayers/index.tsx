@@ -5,8 +5,8 @@ import {
   useUniforms,
 } from "base";
 import { ReactNode } from "react";
-import foregroundFrag from "@/shaders/foreground.frag.glsl";
-import backgroundFrag from "@/shaders/background.frag.glsl";
+import foregroundFrag from "~/shaders/foreground.frag.glsl";
+import backgroundFrag from "~/shaders/background.frag.glsl";
 import { merge } from "lodash";
 
 const seed = Math.random() * 100;
