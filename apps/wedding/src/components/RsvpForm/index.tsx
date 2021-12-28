@@ -3,24 +3,26 @@ import { useImmer } from "use-immer";
 import { useAsync } from "react-async-hook";
 import { addDoc, collection } from "firebase/firestore";
 import { firestore } from "~/services/firebase";
+import shortid from "shortid";
 
 type FormState = {
   name: string;
   message: string;
-  isAttending?: boolean;
-  isBringingGuest?: boolean;
+  isAttending?: true;
+  isBringingGuest?: true;
 };
 
 const submit = async (form: FormState) => {
-  await addDoc(collection(firestore, "rsvp"), form);
+  const result = await addDoc(collection(firestore, "rsvp"), form);
+  console.log(result);
 };
 
 const RsvpForm = () => {
   const [form, updateForm] = useImmer<FormState>({
     name: "",
     message: "",
-    isAttending: undefined,
-    isBringingGuest: undefined,
+    isAttending: true,
+    isBringingGuest: true,
   });
 
   const submission = useAsync(submit, [form], {
@@ -33,6 +35,7 @@ const RsvpForm = () => {
       <input
         value={form.name}
         disabled={submission.loading}
+        className="bg-transparent border-b-width-2px border-white"
         onChange={(e) => {
           const val = e.target.value;
           updateForm((form) => {
@@ -40,6 +43,9 @@ const RsvpForm = () => {
           });
         }}
       />
+      {submission.error && (
+        <div className="color-red-500">{submission.error.message}</div>
+      )}
       <button
         disabled={submission.loading}
         onClick={() => {
