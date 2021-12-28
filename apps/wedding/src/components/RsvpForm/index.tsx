@@ -3,7 +3,6 @@ import { useImmer } from "use-immer";
 import { useAsync } from "react-async-hook";
 import { addDoc, collection } from "firebase/firestore";
 import { firestore } from "~/services/firebase";
-import shortid from "shortid";
 
 type FormState = {
   name: string;
