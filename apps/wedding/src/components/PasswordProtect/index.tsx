@@ -10,6 +10,7 @@ const PasswordProtect = (props: {
   const { key = "_a&s_pw", password = "2468", children } = props;
 
   const [localVal, setLocalVal] = useLocalStorage(key, "");
+  //const [localVal, setLocalVal] = useState("");
   const [fieldVal, setFieldVal] = useState("");
 
   useEffect(() => {
@@ -37,9 +38,9 @@ const PasswordProtect = (props: {
         <div className="flex flex-row space-x-4">
           {times(password.length, (i) => (
             <div
-              className={`rounded-full ${
-                fieldVal[i] ? "bg-gray-50" : "bg-gray-700"
-              } w-5 h-5`}
+              key={i}
+              className={`rounded-full ${fieldVal[i] ? "bg-gray-50" : "bg-gray-700"
+                } w-5 h-5`}
             />
           ))}
         </div>
