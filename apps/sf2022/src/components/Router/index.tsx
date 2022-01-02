@@ -6,6 +6,7 @@ import BottomBar from "../BottomBar";
 import ShaderLayers from "../ShaderLayers";
 import PageTransition from "../PageTransition";
 import { useLocation } from "react-router";
+import GenuaryPage from "~/pages/Genuary";
 
 const Router = () => {
   return (
@@ -26,6 +27,7 @@ const RT = () => {
   return (
     <Routes location={location}>
       <Route path="/experiments" element={<ShadersPage />} />
+      <Route path="/genuary/:day" element={<GenuaryPage />} />
       <Route path="*" element={<HomePage />} />
     </Routes>
   );
