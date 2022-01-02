@@ -10,8 +10,6 @@ const getShaderForDay = async (day?: string) => "";
 const GenuaryPage = () => {
   const { day } = useParams();
 
-  console.log(day);
-
   const shaderLoader = useAsync(getShaderForDay, [day]);
 
   return (
@@ -22,7 +20,7 @@ const GenuaryPage = () => {
         ) : shaderLoader.error ? (
           "Error"
         ) : (
-          <div className="absolute inset-0 mb-40px">
+          <div className="absolute inset-0">
             <ShaderCanvas frag={Day1} />
           </div>
         )}
