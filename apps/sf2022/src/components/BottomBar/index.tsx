@@ -9,7 +9,7 @@ const BottomBar = () => {
           <h1>Steven Frady</h1>
         </Link>
         <span className="h-1 w-1 bg-white rounded-full" />
-        <div>Under Construction</div>
+        <Link to="/genuary/1">#genuary</Link>
         <span className="h-1 w-1 bg-white rounded-full" />
         <a
           className="opacity-50 hover:opacity-100 hover:underline transition"
@@ -32,6 +32,14 @@ const BottomBar = () => {
           target="_blank"
         >
           GitHub
+        </a>
+        <span className="h-1 w-1 bg-white rounded-full" />
+        <a
+          className="opacity-50 hover:opacity-100 hover:underline transition"
+          href="https://twitter.com/slowjamsteve"
+          target="_blank"
+        >
+          Twitter
         </a>
         {/* 
       <>Case Studies</>

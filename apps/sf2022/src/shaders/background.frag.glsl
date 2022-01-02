@@ -114,10 +114,5 @@ void main() {
 	col = mix(col, e, length(e));
 	a += length(e);
 
-	//footer
-	float f = footer(p);
-	col = mix(col, vec3(0.09,0.22,0.15)*0.05, f * 0.8);
-	a += f;
-
   gl_FragColor = vec4(col, a);
 }

@@ -1,29 +1,51 @@
 import { ScrollOutlet, ShaderCanvas } from "base";
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import { useAsync } from "react-async-hook";
+import { Link } from "react-router-dom";
 
-import Day1 from "./1.frag.glsl";
-
-const getShaderForDay = async (day?: string) => "";
+const getShaderForDay = async (day?: string) =>
+  (await import(/* @vite-ignore */ `./${day}.frag.glsl`)).default;
 
 const GenuaryPage = () => {
-  const { day } = useParams();
+  const { day: dayStr } = useParams();
 
-  const shaderLoader = useAsync(getShaderForDay, [day]);
+  const [day, setDay] = useState(parseInt(dayStr || ""));
+
+  const shaderLoader = useAsync(getShaderForDay, [`${day}`]);
+
+  console.log(shaderLoader.result);
 
   return (
     <ScrollOutlet>
       <div className="absolute inset-0">
         {shaderLoader.loading ? (
-          "Loading..."
+          <div className="absolute inset-0 flex justify-center items-center">
+            "Loading..."
+          </div>
         ) : shaderLoader.error ? (
-          "Error"
+          <div className="absolute inset-0 flex justify-center items-center text-red-500">
+            {shaderLoader.error.message}
+          </div>
         ) : (
           <div className="absolute inset-0">
-            <ShaderCanvas frag={Day1} />
+            <ShaderCanvas frag={shaderLoader.result} />
           </div>
         )}
+      </div>
+      <div className="absolute right-4 bottom-40px flex flex-row space-x-3">
+        <Link
+          to={`/genuary/${day - 1}`}
+          className="rounded-full bg-black w-32px h-32px flex justify-center items-center cursor-pointer opacity-50 hover:opacity-100"
+        >
+          {"<"}
+        </Link>
+        <Link
+          to={`/genuary/${day + 1}`}
+          className="rounded-full bg-black w-32px h-32px flex justify-center items-center cursor-pointer opacity-50 hover:opacity-100"
+        >
+          {">"}
+        </Link>
       </div>
     </ScrollOutlet>
   );

@@ -5,6 +5,8 @@ uniform vec2 cursor;
 uniform vec2 scroll;
 uniform float transition;
 
+#define e 2.7182818284590452353602874713527
+
 const	float nMag = 0.05;
 
 float rand(vec2 n) { 
@@ -35,6 +37,10 @@ void fade(inout vec4 col, inout vec2 uv) {
 	col = vec4(mix(col.rgb, vec3(0.), f), col.a + f);
 }
 
+void footer(inout vec4 col, inout vec2 uv) {
+	float amt = 1. - 1.0 / (1. + exp(-1. * (uv.y / 80. - 0.5) * e * 4.));	//scuffed sigmoid
+	col = vec4(mix(col.rgb, vec3(0.09,0.22,0.15) * 0.005, amt), col.a + amt);
+}
 
 void main() {
   vec2 uv = gl_FragCoord.xy / resolution.xy;
@@ -42,6 +48,9 @@ void main() {
 	
 	grain(col, uv);
 	fade(col, uv);
+
+	uv = gl_FragCoord.xy;
+	footer(col, uv);
 
   gl_FragColor = col;
 }
