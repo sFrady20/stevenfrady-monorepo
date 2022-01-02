@@ -23,26 +23,25 @@ float noise(vec2 p){
 	return res*res;
 }
 
+void grain(inout vec4 col, inout vec2 uv) {
+	vec2 pos = uv * resolution;
+	float n = noise(pos) * nMag;
+	col = vec4(mix(col.rgb, vec3(1.), n), max(col.a, n));
+}
 
-void main() {
-  vec2 p = gl_FragCoord.xy - scroll * 1.2;
-	p.y = resolution.y - p.y;
-
-  vec2 uv = gl_FragCoord.xy / resolution.xy;
-
-	vec3 col = vec3(0.);
-	float a = 0.;
-	
-	//noise
-	float n = noise(p + time) * nMag;
-	col = mix(col, vec3(1.), n);
-	a = max(a, n);
-
-	//fade
+void fade(inout vec4 col, inout vec2 uv) {
 	float f = uv.x*0.33+pow(abs(transition), 0.8)*sign(transition);
 	f = smoothstep(0.33,0.66, f) + (1.-smoothstep(-0.66,-0.33, f));
-	col = mix(col, vec3(0.), f);
-	a += f;
+	col = vec4(mix(col.rgb, vec3(0.), f), col.a + f);
+}
 
-  gl_FragColor = vec4(col, a);
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / resolution.xy;
+	vec4 col = gl_FragColor;
+	
+	grain(col, uv);
+	fade(col, uv);
+
+  gl_FragColor = col;
 }
