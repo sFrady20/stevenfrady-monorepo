@@ -12,7 +12,7 @@ const vec3 bubbleHighlightCol = vec3(5., 2.5, 3.);
 vec2 aspect;
 
 float rand(vec2 n) { 
-	return fract(sin(dot(n, vec2(132.9898, 34.1414))) * (43758.5453 + floor(mod(transition + 2., 2.) * 0.5 + 0.5) + seed * 0.74235));
+	return fract(sin(dot(n, vec2(132.9898, 34.1414))) * (43758.5453 + seed * 0.74235));
 }
 
 float noise(vec2 p){

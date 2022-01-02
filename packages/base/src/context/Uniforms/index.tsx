@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useRef } from "react";
+import { DependencyList, ReactNode, useEffect, useMemo, useRef } from "react";
 import { createContext, useContextSelector } from "use-context-selector";
 import { merge } from "lodash";
 
@@ -34,8 +34,13 @@ const UniformsProvider = (props: {
   );
 };
 
-const useUniforms = (overrides?: Uniforms) =>
-  useContextSelector(UniformsContext, (u) => merge(u.uniforms, overrides));
+const useUniforms = (overrides?: Uniforms, deps?: DependencyList) => {
+  const uniforms = useContextSelector(UniformsContext, (u) => u.uniforms);
+  useEffect(() => {
+    merge(uniforms, overrides);
+  }, deps);
+  return uniforms;
+};
 
 export type { UniformsContextType };
 export { useUniforms, UniformsContext, UniformsProvider };

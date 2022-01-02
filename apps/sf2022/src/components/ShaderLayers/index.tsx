@@ -9,8 +9,6 @@ import foregroundFrag from "~/shaders/foreground.frag.glsl";
 import backgroundFrag from "~/shaders/background.frag.glsl";
 import { merge } from "lodash";
 
-const seed = Math.random() * 100;
-
 export const ShaderLayers = (props: {
   children: ReactNode;
   uniforms?: { [s: string]: { value: any } };
@@ -18,10 +16,12 @@ export const ShaderLayers = (props: {
   const { children, uniforms: propUniforms } = props;
   const cursorSpringRef = useCursorSpringRef({ stiffness: 200, damping: 50 });
 
-  const uniforms = useUniforms({
-    seed: { value: seed },
-    cursorSpring: { value: cursorSpringRef },
-  }).current;
+  const uniforms = useUniforms(
+    {
+      cursorSpring: { value: cursorSpringRef },
+    },
+    [cursorSpringRef]
+  );
 
   return (
     <>

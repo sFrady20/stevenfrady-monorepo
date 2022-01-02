@@ -14,8 +14,6 @@ const GenuaryPage = () => {
 
   const shaderLoader = useAsync(getShaderForDay, [`${day}`]);
 
-  console.log(shaderLoader.result);
-
   return (
     <ScrollOutlet>
       <div className="absolute inset-0">

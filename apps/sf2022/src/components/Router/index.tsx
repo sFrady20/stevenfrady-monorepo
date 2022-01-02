@@ -7,16 +7,42 @@ import ShaderLayers from "../ShaderLayers";
 import { useLocation } from "react-router";
 import GenuaryPage from "~/pages/Genuary";
 import { AnimatePresence, motion, useUniforms } from "base";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+const useSeed = (generator?: () => number) => {
+  generator = generator || (() => Math.random() * 100);
+
+  const [seed, setSeed] = useState<number>(generator());
+  const updateSeed = useCallback(() => setSeed(generator!()), []);
+
+  return [seed, updateSeed] as const;
+};
 
 const AnimatedPages = () => {
   const location = useLocation();
 
-  const uniforms = useUniforms({
-    transition: { value: 0 },
-  });
+  const [seed, updateSeed] = useSeed();
+
+  const uniforms = useUniforms(
+    {
+      transition: { value: 0 },
+    },
+    []
+  );
+
+  useUniforms(
+    {
+      seed: { value: seed },
+    },
+    [seed]
+  );
 
   return (
-    <AnimatePresence initial={false} exitBeforeEnter>
+    <AnimatePresence
+      initial={false}
+      exitBeforeEnter
+      onExitComplete={() => updateSeed()}
+    >
       <motion.div
         variants={{
           pageInitial: { x1: -1 },
@@ -24,7 +50,10 @@ const AnimatedPages = () => {
             x1: 0,
             transition: { duration: 0.6 },
           },
-          pageExit: { x1: 1, transition: { duration: 0.6 } },
+          pageExit: {
+            x1: 1,
+            transition: { duration: 0.6 },
+          },
         }}
         key={location.pathname}
         initial="pageInitial"
