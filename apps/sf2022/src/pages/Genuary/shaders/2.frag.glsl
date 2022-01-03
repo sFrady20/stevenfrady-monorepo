@@ -9,6 +9,16 @@ uniform float transition;
 #define LED_SIZE 2.
 
 int octaves = 10;
+vec3[7] palette = vec3[](
+  vec3(0.7,0.3,0.3),
+  vec3(0.3,0.7,0.3),
+  vec3(0.3,0.3,0.7),
+  vec3(0.7,0.7,0.3),
+  vec3(0.3,0.7,0.7),
+  vec3(0.1,0.1,0.2),
+  vec3(0.2,0.2,0.3)
+);
+int paletteSize = 7;
 
 float random(in vec2 st) {
     return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
@@ -39,6 +49,22 @@ float fbm(in vec2 st) {
   return value;
 }
 
+vec3 rgbToHsl(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+vec3 hslToRgb(vec3 c) {
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
 float pattern(in vec2 p) {
   float f = 0.;
   vec2 q = vec2(
@@ -53,6 +79,52 @@ float pattern(in vec2 p) {
   return f;
 }
 
+const float indexMatrix4x4[16] = float[](0.,  8.,  2.,  10.,
+                                        12., 4.,  14., 6.,
+                                        3.,  11., 1.,  9.,
+                                        15., 7.,  13., 5.);
+
+float indexValue() {
+    float x = (mod(gl_FragCoord.x, 4.));
+    float y = (mod(gl_FragCoord.y, 4.));
+    return indexMatrix4x4[int(x + y * 4.)] / 16.;
+}
+
+float hueDistance(float h1, float h2) {
+    float diff = abs((h1 - h2));
+    return min(abs((1.0 - diff)), diff);
+}
+
+vec3[2] closestColors(float hue) {
+    vec3 closest = vec3(-2., 0., 0.);
+    vec3 secondClosest = vec3(-2., 0., 0.);
+    
+    vec3 temp;
+    for (int i = 0; i < paletteSize; ++i) {
+        temp = rgbToHsl(palette[i]);
+        float tempDistance = hueDistance(temp.x, hue);
+        if (tempDistance < hueDistance(closest.x, hue)) {
+            secondClosest = closest;
+            closest = temp;
+        } else {
+            if (tempDistance < hueDistance(secondClosest.x, hue)) {
+                secondClosest = temp;
+            }
+        }
+    }
+    
+    return vec3[2](
+      closest, secondClosest
+    );;
+}
+
+vec3 dither(vec3 color) {
+    vec3 hsl = rgbToHsl(color);
+    vec3[2] cs = closestColors(hsl.x);
+    float d = indexValue();
+    float hueDiff = hueDistance(hsl.x, cs[0].x) / hueDistance(cs[1].x, cs[0].x);
+    return hslToRgb(hueDiff < d ? cs[0] : cs[1]);
+}
 
 void show(inout vec4 col, inout vec2 uv) {
   float r = pattern(uv / 94. + 3825.235);
@@ -64,11 +136,11 @@ void show(inout vec4 col, inout vec2 uv) {
 void dither(inout vec4 col, inout vec2 uv) {
   vec2 pixel = mod(floor(uv/LED_SIZE), 8.0)/8.0;
   float factor = 1.3;
-  vec3 oCol = floor(col.rgb * factor + vec3(0.5)) * factor;
-  float rnd = 1.;
-  oCol.r = step(rnd, oCol.r);
-  oCol.g = step(rnd, oCol.g);
-  oCol.b = step(rnd, oCol.b);
+  vec3 oCol = col.rgb; 
+  
+  //oCol = floor(col.rgb * factor + vec3(0.5)) * factor;
+  oCol = dither(oCol);
+
   col = vec4(oCol, 1.);
 }
 

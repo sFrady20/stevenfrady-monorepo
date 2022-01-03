@@ -10,41 +10,37 @@ const BottomBar = () => {
         </Link>
         <span className="h-1 w-1 bg-white rounded-full" />
         <Link to="/genuary/1">#genuary</Link>
-        <span className="h-1 w-1 bg-white rounded-full" />
+        <span className="h-1 w-1 bg-white rounded-full <md:hidden" />
         <a
-          className="opacity-50 hover:opacity-100 hover:underline transition"
+          className="opacity-50 hover:opacity-100 hover:underline transition <md:hidden"
           href="mailto:sfrady20@gmail.com"
         >
           sfrady20@gmail.com
         </a>
-        <span className="h-1 w-1 bg-white rounded-full" />
+        <span className="h-1 w-1 bg-white rounded-full <md:hidden" />
         <a
-          className="opacity-50 hover:opacity-100 hover:underline transition"
+          className="opacity-50 hover:opacity-100 hover:underline transition <md:hidden"
           href="https://www.linkedin.com/in/stevenfrady/"
           target="_blank"
         >
           LinkedIn
         </a>
-        <span className="h-1 w-1 bg-white rounded-full" />
+        <span className="h-1 w-1 bg-white rounded-full <md:hidden" />
         <a
-          className="opacity-50 hover:opacity-100 hover:underline transition"
+          className="opacity-50 hover:opacity-100 hover:underline transition <md:hidden"
           href="https://github.com/sFrady20"
           target="_blank"
         >
           GitHub
         </a>
-        <span className="h-1 w-1 bg-white rounded-full" />
+        <span className="h-1 w-1 bg-white rounded-full <md:hidden" />
         <a
-          className="opacity-50 hover:opacity-100 hover:underline transition"
+          className="opacity-50 hover:opacity-100 hover:underline transition <md:hidden"
           href="https://twitter.com/slowjamsteve"
           target="_blank"
         >
           Twitter
         </a>
-        {/* 
-      <>Case Studies</>
-      <>Experiments</>
-      */}
       </div>
     </ScrollOutlet>
   );
