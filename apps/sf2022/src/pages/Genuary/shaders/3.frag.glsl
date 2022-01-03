@@ -136,13 +136,13 @@ void blackHole  (inout vec4 col, inout vec2 uv, out float mag) {
   float dx = (uv.x - center.x) / center.x;
   float dy = (uv.y - center.y) / center.x;
   
-  mag = pow(clamp( 1. - sqrt(pow(dx, 2.) + pow(dy, 2.)), .0, 1.), 4.);
+  mag = pow(clamp( 1. - sqrt(pow(dx, 2.) + pow(dy, 2.)), .0, 1.), 5.);
 
   float dist = 1. - sqrt(pow(uv.x - center.x, 2.) + pow(uv.y - center.y, 2.)) / resolution.x;
-  float xMag = pow(expImpulse(fract((dist + time) / 5.) * 5., 5.), 1.);
+  float xMag = pow(expImpulse(fract((dist + time) / 4.) * 4., 4.), 1.);
 
-  uv.x -= dx * (mag + xMag * 0.02) * 10000.;
-  uv.y -= dy * (mag + xMag * 0.02) * 10000.;
+  uv.x -= dx * (mag + xMag * 0.07) * 10000.;
+  uv.y -= dy * (mag + xMag * 0.07) * 10000.;
 
   col = mix (col, vec4(vec3(0.1,0.1,0.2), 1.), xMag * 0.7);
 }
@@ -151,13 +151,13 @@ void main() {
   vec2 aspect = vec2(1., resolution.y/resolution.x);
 
   vec2 uv = gl_FragCoord.xy;
-  vec4 col = vec4(.02,.01,.04,1.);
+  vec4 col = vec4(.04,.02,.08,1.);
 
   float bhMag;
   blackHole(col, uv, bhMag);
 
   ray(col, uv);
-  noise(col, uv);
+  //noise(col, uv);
 
   uv /= resolution.xy; //scale
   uv -= vec2(0.5); //translate
