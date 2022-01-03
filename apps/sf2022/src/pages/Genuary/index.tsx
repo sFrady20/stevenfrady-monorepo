@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import prompts from "./prompts";
 import { TextureLoader } from "three";
 import pipeImg from "./images/pipe.jpg";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import useKeyDown from "~/hooks/useKeyDown";
 
 const loader = new TextureLoader();
@@ -16,12 +16,18 @@ const getShaderForDay = async (day?: string) =>
 
 const GenuaryPage = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { day: dayStr } = useParams();
 
   const day = useMemo(() => parseInt(dayStr || ""), [dayStr]);
   const todaysPrompt = useMemo(() => prompts[day], []);
   const shaderLoader = useAsync(getShaderForDay, [`${day}`]);
   const pipeImage = useMemo(() => loader.load(pipeImg), [pipeImg]);
+
+  const isRecordingMode = useMemo(
+    () => searchParams.get("r") || "",
+    [searchParams]
+  );
 
   useKeyDown(
     "ArrowRight",
@@ -37,10 +43,17 @@ const GenuaryPage = () => {
     },
     [day]
   );
+  useKeyDown(
+    "r",
+    (e) => {
+      setSearchParams({ r: isRecordingMode ? "" : "1" }, { replace: true });
+    },
+    [isRecordingMode]
+  );
 
   return (
     <ScrollOutlet>
-      <div className="absolute inset-0">
+      <div className={`absolute inset-0 ${isRecordingMode ? "z-1000" : ""}`}>
         {shaderLoader.loading ? (
           <div className="absolute inset-0 flex justify-center items-center">
             "Loading..."
@@ -63,7 +76,11 @@ const GenuaryPage = () => {
         )}
       </div>
       {todaysPrompt && (
-        <div className="absolute left-4 top-4 uppercase flex flex-col items-start">
+        <div
+          className={`absolute left-4 top-4 uppercase flex flex-col items-start ${
+            isRecordingMode ? "z-1001" : ""
+          }`}
+        >
           <div className="bg-black">{`Day ${day}: ${todaysPrompt.prompt}`}</div>
           <div className="text-size-10px bg-black">
             prompt credited to:{" "}
