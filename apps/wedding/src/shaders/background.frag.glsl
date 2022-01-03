@@ -74,8 +74,8 @@ float pattern(in vec2 p) {
   return f;
 }
 
-void marble (inout vec4 col,inout vec2 pos) {
-    vec2 scaledMarblePos = pos * MARBLE_SCALE;
+void marble (inout vec4 col, inout vec2 uv) {
+    vec2 scaledMarblePos = uv * MARBLE_SCALE;
     float marbleVal = pattern(scaledMarblePos);
     vec2 scrollUv = scroll.xy / resolution.xy;
 
@@ -91,26 +91,19 @@ void marble (inout vec4 col,inout vec2 pos) {
     // col = mix (col, rsvpCol, smoothstep(1.9,2.0,scrollUv.y + marbleVal));
 }
 
-void leftPane (inout vec4 col, inout vec2 pos) {
+void leftPane (inout vec4 col, inout vec2 uv) {
     //pos *= 1. + pow(scroll.y / resolution.y, 2.);
-    col = mix (col, PANE_COLOR, step((pos.x * leftPanePresence)/resolution.x, 0.5) * leftPanePresence);
+    col = mix (col, PANE_COLOR, step(uv.y, leftPanePresence));
 }
 
-void limit (inout vec4 col, inout vec2 pos) {
-    col = mix(PANE_COLOR, col, step(0.1, pos.x / resolution.x));
-    col = mix(PANE_COLOR, col, 1. - step(0.9, pos.x / resolution.x));
-    col = mix(PANE_COLOR, col, step(0.1, (pos.y + scroll.y) / resolution.y));
-    col = mix(PANE_COLOR, col, 1. - step(0.9, (pos.y + scroll.y) / resolution.y));
-}
-
-void magnifyingGlass (inout vec4 col, inout vec2 pos) {
+void magnifyingGlass (inout vec4 col, inout vec2 uv) {
   float dx = (cursor.x - gl_FragCoord.x) / resolution.x;
   float dy = (resolution.y - cursor.y - gl_FragCoord.y) / resolution.x;
   
   float effect = pow(clamp( 1. - sqrt(pow(dx, 2.) + pow(dy, 2.)) * 10., .0, 1.), 0.1);
 
-  pos.x += dx * effect * 100.;
-  pos.y += dy * effect * 100.;
+  uv.x += dx * effect * 100.;
+  uv.y += dy * effect * 100.;
   
   //col = vec4(effect, effect, effect, 1.);
 }
@@ -118,12 +111,13 @@ void magnifyingGlass (inout vec4 col, inout vec2 pos) {
 void main() {
 
     vec4 col = vec4(0.,0.,0.,1.);
-    vec2 pos = gl_FragCoord.xy - scroll.xy;
+    vec2 uv = gl_FragCoord.xy - scroll.xy;
 
-    leftPane(col, pos);
-    magnifyingGlass(col,pos);
-    marble(col, pos);
-    //limit(col, pos);
+    //magnifyingGlass(col,pos);
+    marble(col, uv);
+
+    uv /= resolution;
+    //leftPane(col, uv);
     
     gl_FragColor = col;
 }

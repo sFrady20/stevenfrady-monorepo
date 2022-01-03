@@ -1,21 +1,29 @@
 import { ScrollOutlet, ShaderCanvas } from "base";
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useParams } from "react-router";
 import { useAsync } from "react-async-hook";
 import { Link } from "react-router-dom";
 import prompts from "./prompts";
+import { TextureLoader } from "three";
+import pipeImg from "./images/pipe.jpg";
+
+const loader = new TextureLoader();
 
 const getShaderForDay = async (day?: string) =>
-  (await import(/* @vite-ignore */ `./${day}.frag.glsl`)).default;
+  (await import(/* @vite-ignore */ `./shaders/${day}.frag.glsl`)).default;
+
+const loadTexture = async (url?: string) => {
+  if (!url) return undefined;
+  return loader.load(url);
+};
 
 const GenuaryPage = () => {
   const { day: dayStr } = useParams();
 
-  const [day, setDay] = useState(parseInt(dayStr || ""));
-
+  const day = useMemo(() => parseInt(dayStr || ""), [dayStr]);
   const todaysPrompt = useMemo(() => prompts[day], []);
-
   const shaderLoader = useAsync(getShaderForDay, [`${day}`]);
+  const pipeImage = useMemo(() => loader.load(pipeImg), [pipeImg]);
 
   return (
     <ScrollOutlet>
@@ -32,7 +40,10 @@ const GenuaryPage = () => {
           </div>
         ) : (
           <div className="absolute inset-0">
-            <ShaderCanvas frag={shaderLoader.result} />
+            <ShaderCanvas
+              frag={shaderLoader.result}
+              uniforms={{ image: { value: pipeImage } }}
+            />
           </div>
         )}
       </div>

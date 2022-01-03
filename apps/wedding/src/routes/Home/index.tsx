@@ -21,7 +21,7 @@ const HomePage = () => {
   const opennessSpring = useSpring(openness);
 
   useTransform(opennessSpring, (y) => {
-    uniforms.leftPanePresence.value = y;
+    if (uniforms.leftPanePresence) uniforms.leftPanePresence.value = y;
   });
 
   return (
