@@ -79,15 +79,13 @@ float pattern(in vec2 p) {
   return f;
 }
 
-const float indexMatrix4x4[16] = float[](0.,  8.,  2.,  10.,
-                                        12., 4.,  14., 6.,
-                                        3.,  11., 1.,  9.,
-                                        15., 7.,  13., 5.);
+const float indexMatrix[4] = float[](0.,  8.,
+                                     12., 4.);
 
 float indexValue() {
-    float x = (mod(gl_FragCoord.x, 4.));
-    float y = (mod(gl_FragCoord.y, 4.));
-    return indexMatrix4x4[int(x + y * 4.)] / 16.;
+    float x = mod(gl_FragCoord.x, 2.);
+    float y = mod(gl_FragCoord.y, 2.);
+    return indexMatrix[int(x + y * 2.)] / 4.;
 }
 
 float hueDistance(float h1, float h2) {
@@ -153,9 +151,9 @@ void main() {
   show(col, uv);
   dither(col, uv);
 
-  uv /= resolution.xy; //scale
-  uv -= vec2(0.5); //translate
-  uv *= aspect; //apply aspect
+  // uv /= resolution.xy; //scale
+  // uv -= vec2(0.5); //translate
+  // uv *= aspect; //apply aspect
 
   //show(col, uv);
 

@@ -7,7 +7,6 @@ const useKeyDown = (
 ) => {
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      console.log(e.code);
       if (e.key === key) handler(e);
     };
     window.addEventListener("keydown", listener);
