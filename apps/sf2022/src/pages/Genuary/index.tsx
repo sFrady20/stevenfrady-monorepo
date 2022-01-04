@@ -4,15 +4,13 @@ import { useParams } from "react-router";
 import { useAsync } from "react-async-hook";
 import { Link } from "react-router-dom";
 import prompts from "./prompts";
-import { TextureLoader } from "three";
-import pipeImg from "./images/pipe.jpg";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useKeyDown from "~/hooks/useKeyDown";
 
-const loader = new TextureLoader();
-
 const getShaderForDay = async (day?: string) =>
   (await import(/* @vite-ignore */ `./shaders/${day}.frag.glsl`)).default;
+const getComponentForDay = async (day?: string) =>
+  (await import(/* @vite-ignore */ `./shaders/${day}.component.tsx`)).default;
 
 const GenuaryPage = () => {
   const navigate = useNavigate();
@@ -22,7 +20,12 @@ const GenuaryPage = () => {
   const day = useMemo(() => parseInt(dayStr || ""), [dayStr]);
   const todaysPrompt = useMemo(() => prompts[day], []);
   const shaderLoader = useAsync(getShaderForDay, [`${day}`]);
-  const pipeImage = useMemo(() => loader.load(pipeImg), [pipeImg]);
+  const componentLoader = useAsync(getComponentForDay, [`${day}`]);
+
+  const ComponentForDay = useMemo(
+    () => componentLoader.result,
+    [componentLoader.result]
+  );
 
   const isRecordingMode = useMemo(
     () => searchParams.get("r") || "",
@@ -68,10 +71,7 @@ const GenuaryPage = () => {
           </div>
         ) : (
           <div className="absolute inset-0">
-            <ShaderCanvas
-              frag={shaderLoader.result}
-              uniforms={{ image: { value: pipeImage } }}
-            />
+            <ShaderCanvas frag={shaderLoader.result} />
           </div>
         )}
       </div>
@@ -102,6 +102,7 @@ const GenuaryPage = () => {
           {">"}
         </Link>
       </div>
+      {ComponentForDay && <ComponentForDay />}
     </ScrollOutlet>
   );
 };

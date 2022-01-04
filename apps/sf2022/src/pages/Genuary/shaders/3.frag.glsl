@@ -5,6 +5,8 @@ uniform vec2 cursor;
 uniform vec2 scroll;
 uniform float transition;
 
+uniform vec2 cursorSpring;
+
 float noise3D(vec3 p) {
 	return fract(sin(dot(p ,vec3(12.9898,78.233,128.852))) * 43758.5453)*2.0-1.0;
 }
@@ -132,9 +134,10 @@ float expImpulse( float x, float k ) {
 
 void blackHole  (inout vec4 col, inout vec2 uv, out float mag) {
   vec2 center = resolution * 0.5;
+  center += (cursorSpring - resolution * 0.5) * vec2(0.1,-0.1);
 
-  float dx = (uv.x - center.x) / center.x;
-  float dy = (uv.y - center.y) / center.x;
+  float dx = (uv.x - center.x) / (resolution.x * 0.5);
+  float dy = (uv.y - center.y) / (resolution.x * 0.5);
   
   mag = pow(clamp( 1. - sqrt(pow(dx, 2.) + pow(dy, 2.)), .0, 1.), 5.);
 
