@@ -33,14 +33,14 @@ const GenuaryPage = () => {
   );
 
   useKeyDown(
-    "ArrowRight",
+    ["ArrowRight", "d"],
     (e) => {
       navigate(`/genuary/${day + 1}`);
     },
     [day]
   );
   useKeyDown(
-    "ArrowLeft",
+    ["ArrowLeft", "a"],
     (e) => {
       navigate(`/genuary/${day - 1}`);
     },

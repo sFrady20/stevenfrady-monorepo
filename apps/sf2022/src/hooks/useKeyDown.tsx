@@ -1,13 +1,13 @@
 import { DependencyList, useEffect } from "react";
 
 const useKeyDown = (
-  key: string,
+  key: string | string[],
   handler: (e: KeyboardEvent) => void,
   deps?: DependencyList
 ) => {
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
-      if (e.key === key) handler(e);
+      if (Array.isArray(key) ? key.includes(e.key) : e.key === key) handler(e);
     };
     window.addEventListener("keydown", listener);
     return () => {

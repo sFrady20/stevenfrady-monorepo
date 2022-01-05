@@ -5,6 +5,9 @@ uniform vec2 cursor;
 uniform vec2 scroll;
 uniform float transition;
 
+#define TRUCHET_SCALE 5.
+#define TRUCHET_TIME_SCALE 0.
+
 //3D gradient noise by Íñigo Quílez
 vec3 hash(vec3 p){
 	p = vec3( dot(p,vec3(127.1,311.7, 74.7)),
@@ -30,30 +33,12 @@ float noise(in vec3 p){
                         dot( hash( i + vec3(1.0,1.0,1.0) ), f - vec3(1.0,1.0,1.0) ), u.x), u.y), u.z );
 }
 
-float dist2Line(vec2 a, vec2 b, vec2 p) { 
-  p -= a, b -= a;
-	float h = clamp(dot(p, b) / dot(b, b), 0., 1.); 
-	return length( p - b * h );                       
-}
-
-vec2 rotate2D(vec2 _st, float _angle){
-  //_st -= 0.5;
-  _st =  mat2(cos(_angle),-sin(_angle),
-              sin(_angle),cos(_angle)) * _st;
-  //_st += 0.5;
-  return _st;
-}
-
 
 vec2 H(vec2 p) {                   // closestHexCenters(p)
 	vec2  f = fract(p);  p -= f;
 	float v = fract((p.x + p.y)/3.);
   return  v<.6 ?   v<.3 ?  p  :  ++p  :  p + step(f.yx,f) ; 
 }
-
-
-#define TRUCHET_SCALE 5.
-#define TRUCHET_TIME_SCALE 0.
 
 void truchet(inout vec4 col, inout vec2 uv, in float rnd) {
 	vec2  h; 
@@ -86,7 +71,6 @@ void truchet(inout vec4 col, inout vec2 uv, in float rnd) {
 
 }
 
-
 void main() {
   vec2 aspect = vec2(1., resolution.y/resolution.x);
 
@@ -97,12 +81,6 @@ void main() {
   vec4 col = bgCol;
   
   truchet(col, uv, 325.1414);
-  //col = mix(col, vec4(vec3(0.5,0.2,0.4), 1.), step(1. - f, .9));
-
-  //float f2 = truchet(col, uv, 433.249);
-  //col = mix(col, bgCol, step(f2, 0.5));
-
-  //truchet(col, uv, 352.2624);
 
   gl_FragColor = col;
 }
