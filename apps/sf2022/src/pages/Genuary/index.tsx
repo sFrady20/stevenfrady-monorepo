@@ -88,16 +88,16 @@ const GenuaryPage = () => {
           </div>
         </div>
       )}
-      <div className="absolute right-4 bottom-40px flex flex-row space-x-3 <md:hidden">
+      <div className="absolute right-4 bottom-40px flex flex-row space-x-3 <md:bottom-52px">
         <Link
           to={`/genuary/${day - 1}`}
-          className="rounded-full bg-black w-32px h-32px flex justify-center items-center cursor-pointer opacity-50 hover:opacity-100"
+          className="rounded-full bg-black w-32px h-32px flex justify-center items-center cursor-pointer opacity-50 hover:opacity-100 <md:h-40px <md:w-40px"
         >
           {"<"}
         </Link>
         <Link
           to={`/genuary/${day + 1}`}
-          className="rounded-full bg-black w-32px h-32px flex justify-center items-center cursor-pointer opacity-50 hover:opacity-100"
+          className="rounded-full bg-black w-32px h-32px flex justify-center items-center cursor-pointer opacity-50 hover:opacity-100 <md:h-40px <md:w-40px"
         >
           {">"}
         </Link>

@@ -35,6 +35,42 @@ export default [
     credit: "Thomas Lin Pedersen",
     ceditLink: "https://twitter.com/thomasp85",
   },
+  //6
+  {
+    prompt: "Trade styles with a friend.",
+    credit: "Alex Naka",
+    ceditLink: "https://www.instagram.com/bb_bygones",
+  },
+  //7
+  {
+    prompt: "Sol LeWitt Wall Drawing.",
+    credit: "Roni Kaufman",
+    ceditLink: "https://twitter.com/KaufmanRoni",
+  },
+  //8
+  {
+    prompt: "Single curve only.",
+    credit: "Bruce Holmer",
+    ceditLink: "https://twitter.com/bruceHolmer",
+  },
+  //9
+  {
+    prompt: "Architecture.",
+    credit: "Lionel Radisson",
+    ceditLink: "https://twitter.com/makIO135/",
+  },
+  //10
+  {
+    prompt: "Machine learning, wrong answers only.",
+    credit: "Roni Kaufman",
+    ceditLink: "https://twitter.com/KaufmanRoni",
+  },
+  //11
+  {
+    prompt: "No computer.",
+    credit: "Lionel Radisson",
+    ceditLink: "https://twitter.com/makIO135/",
+  },
 ];
 
 //find more at https://genuary.art/prompts
