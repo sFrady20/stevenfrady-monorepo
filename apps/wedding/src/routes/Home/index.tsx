@@ -1,9 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { useScroll, useUniforms } from "base";
 import { useSpring, useTransform } from "framer-motion";
 import RsvpForm from "~/components/RsvpForm";
+import AboutContent from "~/content/About";
 
-const HomePage = () => {
+const HomePage = memo(() => {
   const { x, y } = useScroll();
 
   const uniforms = useUniforms({
@@ -37,9 +38,32 @@ const HomePage = () => {
         </div>
       </div>
       <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
-        <RsvpForm />
+        <div className="w-800px text-size-24px leading-40px">
+          <div>When: Sunday, 18 September 2022 ; 3:00PM to 8:30PM </div>
+          <div>
+            Where: Mansion on Forsyth Park, 700 Drayton St, Savannah, GA 31401
+          </div>
+          <div>
+            RSVP: Click here to RSVP online, or mail your response as per your
+            wedding invite
+          </div>
+          <div>
+            Registry: We have no wedding registry! Seeing as how we’ve already
+            bought a house and filled it with most everything we need, we’d much
+            prefer donations to go toward our impending Honeymoon; additionally,
+            we don’t live in Savannah, so bringing back gifts would be somewhat
+            onerous. Obviously, there’s no need to give anything material, as
+            your presence would be the best gift we could receive 😊
+          </div>
+        </div>
+      </div>
+      <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
+        <div className="w-800px text-size-24px leading-40px">
+          <AboutContent />
+        </div>
       </div>
       <div className="min-h-screen min-w-screen flex flex-col justify-end items-center">
+        <RsvpForm />
         <div className="container border-t-1 border-white mx-auto p-4 flex flex-row space-x-6 text-white items-center">
           <h1 className="text-size-32px">A&S</h1>
           <div className="text-size-sm">September 18th, 2022</div>
@@ -56,6 +80,6 @@ const HomePage = () => {
       </div>
     </>
   );
-};
+});
 
 export default HomePage;

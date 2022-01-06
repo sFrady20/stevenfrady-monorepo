@@ -1,6 +1,5 @@
 @font-face {
   font-family: Sage;
-  /* src: url("/fonts/Harmond-SemiBoldCondensed.otf") format("opentype"); */
   src: url("/fonts/Sage.otf") format("opentype");
 }
 @font-face {
@@ -8,16 +7,20 @@
   src: url("/fonts/Harmond-SemiBoldCondensed.otf") format("opentype");
 }
 @font-face {
+  font-family: Velour;
+  src: url("/fonts/Velour Medium.otf") format("opentype");
+}
+@font-face {
   font-family: Regular;
   src: url("/fonts/Mukta-Regular.ttf") format("truetype");
 }
 
 * {
-  font-family: Regular, sans-serif;
+  font-family: Velour, sans-serif;
 }
 
 h1 {
-  font-family: Sage, sans-serif;
+  font-family: Velour, sans-serif;
 }
 
 body {
