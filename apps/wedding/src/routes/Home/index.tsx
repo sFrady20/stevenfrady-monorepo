@@ -38,15 +38,29 @@ const HomePage = memo(() => {
         </div>
       </div>
       <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
-        <div className="w-800px text-size-24px leading-40px">
+        <div className="w-800px text-size-24px leading-40px bg-white py-15 px-10">
           <div>When: Sunday, 18 September 2022 ; 3:00PM to 8:30PM </div>
-          <div>
-            Where: Mansion on Forsyth Park, 700 Drayton St, Savannah, GA 31401
+          <div className="w-800px text-size-24px leading-40px bg-white py-15 px-10">
+            <div>
+              Where: Mansion on Forsyth Park, 700 Drayton St, Savannah, GA 31401
+            </div>
           </div>
-          <div>
-            RSVP: Click here to RSVP online, or mail your response as per your
-            wedding invite
+          <div className="w-800px text-size-24px leading-40px bg-white py-15 px-10">
+            <div>
+              RSVP: Click here to RSVP online, or mail your response as per your
+              wedding invite
+            </div>
           </div>
+        </div>
+      </div>
+      <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
+        <div className="w-800px text-size-24px leading-40px bg-white py-15 px-10">
+          <AboutContent />
+        </div>
+      </div>
+      <div className="min-h-screen min-w-screen flex flex-col justify-end items-center">
+        <RsvpForm />
+        <div className="w-800px text-size-24px leading-40px bg-white py-15 px-10">
           <div>
             Registry: We have no wedding registry! Seeing as how we’ve already
             bought a house and filled it with most everything we need, we’d much
@@ -56,14 +70,6 @@ const HomePage = memo(() => {
             your presence would be the best gift we could receive 😊
           </div>
         </div>
-      </div>
-      <div className="min-h-screen min-w-screen flex flex-col justify-center items-center">
-        <div className="w-800px text-size-24px leading-40px">
-          <AboutContent />
-        </div>
-      </div>
-      <div className="min-h-screen min-w-screen flex flex-col justify-end items-center">
-        <RsvpForm />
         <div className="container border-t-1 border-white mx-auto p-4 flex flex-row space-x-6 text-white items-center">
           <h1 className="text-size-32px">A&S</h1>
           <div className="text-size-sm">September 18th, 2022</div>
