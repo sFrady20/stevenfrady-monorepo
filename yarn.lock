@@ -309,6 +309,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.15.4":
+  version: 7.16.7
+  resolution: "@babel/runtime@npm:7.16.7"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 47912f0aaacd1cab2e2552aaf3e6eaffbcaf2d5ac9b07a89a12ac0d42029cb92c070b0d16f825e4277c4a34677c54d8ffe85e1f7c6feb57de58f700eec67ce2f
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.7.6":
   version: 7.16.3
   resolution: "@babel/runtime@npm:7.16.3"
@@ -1089,6 +1098,13 @@ __metadata:
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
   checksum: e1fb1bbbc12089a0cb9433dc290f97bddd062deadb6178ce9bcb93bb7c1aecde5e60184bc7065aec42fe1663622a213493c48bbd4972d931aae48315f18e1be9
+  languageName: node
+  linkType: hard
+
+"@types/file-saver@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@types/file-saver@npm:2.0.4"
+  checksum: 508865c5088771b3f07fcc2ca6f496b59593c7d16830914313ef94c81ca259570c77e39c385d2c8c5febe525cbd0d1938fb6adb7278246df24b556375678966e
   languageName: node
   linkType: hard
 
@@ -2003,6 +2019,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"file-saver@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "file-saver@npm:2.0.5"
+  checksum: c62d96e5cebc58b4bdf3ae8a60d5cf9607ad82f75f798c33a4ee63435ac2203002584d5256a2a780eda7feb5e19dc3b6351c2212e58b3f529e63d265a7cc79f7
+  languageName: node
+  linkType: hard
+
 "fill-range@npm:^7.0.1":
   version: 7.0.1
   resolution: "fill-range@npm:7.0.1"
@@ -2334,6 +2357,28 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"ics-browser@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "ics-browser@npm:2.4.1"
+  dependencies:
+    joi-browser: ^10.6.0
+    lodash: ^4.17.4
+    moment: ^2.18.1
+    uuid: ^3.1.0
+  checksum: ba1e1dcebe4cd339889644ebc772c6578bba644dff1b2a588d95255d08b5042b1956d1f9d48081362893732feee6aaee6267060867a490db4a07b8ab5f513bbc
+  languageName: node
+  linkType: hard
+
+"ics@npm:^2.35.0":
+  version: 2.35.0
+  resolution: "ics@npm:2.35.0"
+  dependencies:
+    nanoid: ^3.1.23
+    yup: ^0.32.9
+  checksum: a098e0dddf5e9d23c38c1de5105467130f667107483cda24ab398277f6ad0f343ec08ab53eff3be32899f42bf15134fce28488809088b7a4a2c25013a8e5f8d3
+  languageName: node
+  linkType: hard
+
 "idb@npm:3.0.2":
   version: 3.0.2
   resolution: "idb@npm:3.0.2"
@@ -2533,6 +2578,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"joi-browser@npm:^10.6.0":
+  version: 10.6.1
+  resolution: "joi-browser@npm:10.6.1"
+  checksum: 0fb71f03fd92e1a006255f9a69cfe0427be86d49e5b9ba758d051db68085ad9af2a6c089393d0c3a43654f03aff61b664ba84aba6a27f59e4c2e35acd259f644
+  languageName: node
+  linkType: hard
+
 "joycon@npm:^3.0.1":
   version: 3.0.1
   resolution: "joycon@npm:3.0.1"
@@ -2602,6 +2654,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"lodash-es@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash-es@npm:4.17.21"
+  checksum: 05cbffad6e2adbb331a4e16fbd826e7faee403a1a04873b82b42c0f22090f280839f85b95393f487c1303c8a3d2a010048bf06151a6cbe03eee4d388fb0a12d2
+  languageName: node
+  linkType: hard
+
 "lodash.camelcase@npm:^4.3.0":
   version: 4.3.0
   resolution: "lodash.camelcase@npm:4.3.0"
@@ -2609,7 +2668,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.21":
+"lodash@npm:^4.17.21, lodash@npm:^4.17.4":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -2801,6 +2860,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"moment@npm:^2.18.1":
+  version: 2.29.1
+  resolution: "moment@npm:2.29.1"
+  checksum: 1e14d5f422a2687996be11dd2d50c8de3bd577c4a4ca79ba5d02c397242a933e5b941655de6c8cb90ac18f01cc4127e55b4a12ae3c527a6c0a274e455979345e
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -2823,6 +2889,22 @@ fsevents@~2.3.2:
     object-assign: ^4.0.1
     thenify-all: ^1.0.0
   checksum: 8427de0ece99a07e9faed3c0c6778820d7543e3776f9a84d22cf0ec0a8eb65f6e9aee9c9d353ff9a105ff62d33a9463c6ca638974cc652ee8140cd1e35951c87
+  languageName: node
+  linkType: hard
+
+"nanoclone@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "nanoclone@npm:0.2.1"
+  checksum: 96b2954e22f70561f41e20d69856266c65583c2a441dae108f1dc71b716785d2c8038dac5f1d5e92b117aed3825f526b53139e2e5d6e6db8a77cfa35b3b8bf40
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^3.1.23":
+  version: 3.1.30
+  resolution: "nanoid@npm:3.1.30"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 276d0d4b0c41c46aeefec5f09f093e4085a2352d06881c845db22b84f8ef72cc8defae6d76bfb1d8a2a128eb2dec42ab148d16582be4e7754c97905806ef57b6
   languageName: node
   linkType: hard
 
@@ -3100,6 +3182,13 @@ fsevents@~2.3.2:
     err-code: ^2.0.2
     retry: ^0.12.0
   checksum: f96a3f6d90b92b568a26f71e966cbbc0f63ab85ea6ff6c81284dc869b41510e6cdef99b6b65f9030f0db422bf7c96652a3fff9f2e8fb4a0f069d8f4430359429
+  languageName: node
+  linkType: hard
+
+"property-expr@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "property-expr@npm:2.0.4"
+  checksum: 7ac142e189f0feef685f327f582efe13bfbc24a0b6e2328afdb38520bc140caa5f91dfa9529f2539b4468d85dc83a593e1ef0e0f7401b525368bb634b323bf54
   languageName: node
   linkType: hard
 
@@ -3765,6 +3854,13 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
+"toposort@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "toposort@npm:2.0.2"
+  checksum: d64c74b570391c9432873f48e231b439ee56bc49f7cb9780b505cfdf5cb832f808d0bae072515d93834dd6bceca5bb34448b5b4b408335e4d4716eaf68195dcb
+  languageName: node
+  linkType: hard
+
 "tr46@npm:~0.0.3":
   version: 0.0.3
   resolution: "tr46@npm:0.0.3"
@@ -3932,6 +4028,15 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
+"uuid@npm:^3.1.0":
+  version: 3.4.0
+  resolution: "uuid@npm:3.4.0"
+  bin:
+    uuid: ./bin/uuid
+  checksum: 58de2feed61c59060b40f8203c0e4ed7fd6f99d42534a499f1741218a1dd0c129f4aa1de797bcf822c8ea5da7e4137aa3673431a96dae729047f7aca7b27866f
+  languageName: node
+  linkType: hard
+
 "vite-plugin-glsl@npm:^0.0.4":
   version: 0.0.4
   resolution: "vite-plugin-glsl@npm:0.0.4"
@@ -4015,6 +4120,7 @@ resolve@^1.20.0:
   dependencies:
     "@googlemaps/js-api-loader": ^1.13.1
     "@react-three/fiber": ^7.0.17
+    "@types/file-saver": ^2.0.4
     "@types/google.maps": ^3.47.2
     "@types/lodash": ^4.14.175
     "@types/node": ^16.11.6
@@ -4023,7 +4129,10 @@ resolve@^1.20.0:
     "@vitejs/plugin-react": ^1.0.0
     axios: ^0.24.0
     base: "workspace:packages/base"
+    file-saver: ^2.0.5
     firebase: ^9.6.1
+    ics: ^2.35.0
+    ics-browser: ^2.4.1
     immer: ^9.0.7
     lodash: ^4.17.21
     react: ^17.0.0
@@ -4163,6 +4272,21 @@ resolve@^1.20.0:
     y18n: ^5.0.5
     yargs-parser: ^20.2.2
   checksum: b14afbb51e3251a204d81937c86a7e9d4bdbf9a2bcee38226c900d00f522969ab675703bee2a6f99f8e20103f608382936034e64d921b74df82b63c07c5e8f59
+  languageName: node
+  linkType: hard
+
+"yup@npm:^0.32.9":
+  version: 0.32.11
+  resolution: "yup@npm:0.32.11"
+  dependencies:
+    "@babel/runtime": ^7.15.4
+    "@types/lodash": ^4.14.175
+    lodash: ^4.17.21
+    lodash-es: ^4.17.21
+    nanoclone: ^0.2.1
+    property-expr: ^2.0.4
+    toposort: ^2.0.2
+  checksum: 43a16786b47cc910fed4891cebdd89df6d6e31702e9462e8f969c73eac88551ce750732608012201ea6b93802c8847cb0aa27b5d57370640f4ecf30f9f97d4b0
   languageName: node
   linkType: hard
 

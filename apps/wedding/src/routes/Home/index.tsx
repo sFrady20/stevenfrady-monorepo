@@ -2,9 +2,22 @@ import React, { memo } from "react";
 import { useScroll, useUniforms } from "base";
 import { useSpring, useTransform } from "framer-motion";
 import RsvpForm from "~/components/RsvpForm";
-import AboutContent from "~/content/About";
-import Map from "~/components/Map";
-import forsythImg from "./forsyth.jpeg";
+import { createEvent } from "ics";
+import { saveAs } from "file-saver";
+
+import dominoImg from "~/assets/domino/IMG_20210617_115548.jpg";
+import usImg from "~/assets/us/20161218_135922.jpg";
+
+const event = createEvent({
+  start: [2022, 9, 18, 15, 0],
+  duration: { hours: 5, minutes: 30 },
+  title: "Ariana & Steven's Wedding",
+  location: "Mansion on Forsyth, 700 Drayton St, Savannah, GA 31401",
+  geo: { lat: 32.0673266, lon: -81.095102 },
+  busyStatus: "BUSY",
+  organizer: { name: "Ariana", email: "acguy92@gmail.com" },
+  url: "https://www.guyfradywedding.com",
+});
 
 const HomePage = memo(() => {
   const { x, y } = useScroll();
@@ -38,29 +51,46 @@ const HomePage = memo(() => {
             <h3>Savannah, Georgia</h3>
           </div>
         </div>
-        <div className="flex flex-row rounded overflow-hidden border-width-1px divide-x-1">
-          <div className="w-320px bg-gray-50 space-y-2 px-8 py-5 cursor-pointer hover:bg-gray-100 transition transition-colors relative">
+        <div className="flex flex-row rounded border-width-1px divide-x-1">
+          <div
+            className="w-320px bg-gray-50 space-y-2 px-8 py-5 cursor-pointer group hover:bg-gray-100 transition transition-colors relative"
+            onClick={() => {
+              const blob = new Blob([event.value || ""], {
+                type: "text/plain;charset=utf-8",
+              });
+              saveAs(blob, "guyFradyWeddingCalEvent.ics");
+            }}
+          >
             <div className="text-md inline border-b-width-1px pb-1">When</div>
             <div className="text-lg leading-normal">
               Sunday, 18 September 2022
               <br />
               3:00PM to 8:30PM
             </div>
-            <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 top-0 rounded-md px-3 py-2 hidden">
-              Add to calendar
+            <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 -top-8 rounded-md px-3 py-2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all group-hover:-top-10">
+              Add to Calendar
             </div>
           </div>
-          <div className="w-400px bg-gray-50 space-y-2 px-8 py-5 cursor-pointer hover:bg-gray-100 transition transition-colors relative">
-            <div className="text-md inline border-b-width-1px pb-1">Where</div>
-            <div className="text-lg leading-normal">
-              Mansion on Forsyth Park
-              <br />
-              700 Drayton St, Savannah, GA 31401
+          <a
+            target="_blank"
+            rel="noreferrer nofollow"
+            className="group"
+            href="https://www.google.com/maps/place/Mansion+on+Forsyth+Park/@32.0673266,-81.095102,17z/data=!3m1!5s0x88fb9e6ae299308d:0xc2e1ee74bcf72450!4m18!1m9!3m8!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!2sMansion+on+Forsyth+Park!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798!3m7!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798"
+          >
+            <div className="w-400px bg-gray-50 space-y-2 px-8 py-5 group-hover:bg-gray-100 transition transition-colors relative box-border">
+              <div className="text-md inline border-b-width-1px pb-1">
+                Where
+              </div>
+              <div className="text-lg leading-normal">
+                Mansion on Forsyth Park
+                <br />
+                700 Drayton St, Savannah, GA 31401
+              </div>
+              <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 -top-8 rounded-md px-3 py-2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all group-hover:-top-10">
+                View Map
+              </div>
             </div>
-            <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 top-0 rounded-md px-3 py-2 hidden">
-              Open in Google Maps
-            </div>
-          </div>
+          </a>
           <div className="w-500px bg-gray-100 py-6 px-8 flex flex-row space-x-8 items-center">
             <button className="border border-solid border-black px-12 py-4 text-lg transform transition-all hover:bg-gray-200 hover:-translate-y-2px">
               RSVP
@@ -94,10 +124,24 @@ const HomePage = memo(() => {
         </div>
       </div> */}
       <div className="min-h-screen min-w-screen flex flex-col items-center">
-        <div className="flex flex-row flex-1 py-16">
-          <div className="w-800px flex flex-row justify-center items-center">
-            <div>Photo Gallery</div>
-            <div>Domino Gallery</div>
+        <div className="flex flex-row flex-1 py-16 items-center">
+          <div className="w-800px flex flex-row justify-center items-center relative">
+            <div
+              className="absolute left-1/2 top-1/2 transform rotate-10 -translate-x-120 -translate-y-75 w-100 h-120 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg flex justify-center items-center"
+              style={{
+                backgroundImage: `url(${dominoImg})`,
+              }}
+            >
+              Domino Gallery
+            </div>
+            <div
+              className="absolute left-1/2 top-1/2 transform -rotate-10 -translate-x-20 -translate-y-1/3 w-100 h-120 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg flex justify-center items-center"
+              style={{
+                backgroundImage: `url(${usImg})`,
+              }}
+            >
+              Photo Gallery
+            </div>
           </div>
           <div className="flex flex-col space-y-6">
             <RsvpForm />
@@ -116,12 +160,11 @@ const HomePage = memo(() => {
           <div className="text-size-sm">September 18th, 2022</div>
           <div className="text-size-sm">700 Drayton St Savannah, GA 31401</div>
           <div className="flex-1"></div>
-          <div className="opacity-30">
-            ©{" "}
+          <div className="opacity-80 text-size-sm">
+            Des. & Dev. by{" "}
             <a href="http://stevenfrady.com" target="_blank">
               Steven Frady
-            </a>{" "}
-            2022
+            </a>
           </div>
         </div>
       </div>

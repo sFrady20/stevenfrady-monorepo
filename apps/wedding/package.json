@@ -11,7 +11,10 @@
     "@react-three/fiber": "^7.0.17",
     "axios": "^0.24.0",
     "base": "workspace:packages/base",
+    "file-saver": "^2.0.5",
     "firebase": "^9.6.1",
+    "ics": "^2.35.0",
+    "ics-browser": "^2.4.1",
     "immer": "^9.0.7",
     "lodash": "^4.17.21",
     "react": "^17.0.0",
@@ -29,6 +32,7 @@
     "windicss": "^3.1.9"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.4",
     "@types/google.maps": "^3.47.2",
     "@types/lodash": "^4.14.175",
     "@types/node": "^16.11.6",
