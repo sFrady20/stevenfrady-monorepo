@@ -871,6 +871,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@googlemaps/js-api-loader@npm:^1.13.1":
+  version: 1.13.1
+  resolution: "@googlemaps/js-api-loader@npm:1.13.1"
+  dependencies:
+    fast-deep-equal: ^3.1.3
+  checksum: a8a3fba4346907e3e0346cce4276324662dc66d7076193fe5990cc238a50aed2099443c0d5c07888f2bcd0dc32fe5c5c10630c47799bb8780e49ffd8eefc81e9
+  languageName: node
+  linkType: hard
+
 "@grpc/grpc-js@npm:^1.3.2":
   version: 1.4.5
   resolution: "@grpc/grpc-js@npm:1.4.5"
@@ -1080,6 +1089,13 @@ __metadata:
   version: 1.1.2
   resolution: "@tootallnate/once@npm:1.1.2"
   checksum: e1fb1bbbc12089a0cb9433dc290f97bddd062deadb6178ce9bcb93bb7c1aecde5e60184bc7065aec42fe1663622a213493c48bbd4972d931aae48315f18e1be9
+  languageName: node
+  linkType: hard
+
+"@types/google.maps@npm:^3.47.2":
+  version: 3.47.2
+  resolution: "@types/google.maps@npm:3.47.2"
+  checksum: 421416b87d232d2231cdfd83dde64c71ac141d8255f1cac2718c8422bdfdc32f89eeecf86b9b4420387d354761b4eb0635a17bee0113ffbecdaef63ca5b59fd9
   languageName: node
   linkType: hard
 
@@ -3997,7 +4013,9 @@ resolve@^1.20.0:
   version: 0.0.0-use.local
   resolution: "wedding@workspace:apps/wedding"
   dependencies:
+    "@googlemaps/js-api-loader": ^1.13.1
     "@react-three/fiber": ^7.0.17
+    "@types/google.maps": ^3.47.2
     "@types/lodash": ^4.14.175
     "@types/node": ^16.11.6
     "@types/react": ^17.0.0

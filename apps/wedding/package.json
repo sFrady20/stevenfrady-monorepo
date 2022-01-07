@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.13.1",
     "@react-three/fiber": "^7.0.17",
     "axios": "^0.24.0",
     "base": "workspace:packages/base",
@@ -28,6 +29,7 @@
     "windicss": "^3.1.9"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.47.2",
     "@types/lodash": "^4.14.175",
     "@types/node": "^16.11.6",
     "@types/react": "^17.0.0",
