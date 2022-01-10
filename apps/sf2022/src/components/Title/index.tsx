@@ -132,17 +132,19 @@ const Title = () => {
         </defs>
       </svg>
 
-      <motion.h2
-        ref={elRef}
-        className="text-size-9rem text-gray-50 font-extrabold relative cursor-default m-0 select-none"
-        style={{
-          filter: `url(#ghost)`,
-        }}
-      >
-        CREATIVE
-        <br />
-        DEVELOPER
-      </motion.h2>
+      <div className="container mx-auto">
+        <motion.h2
+          ref={elRef}
+          className="text-size-9rem text-gray-50 font-extrabold relative cursor-default m-0 select-none"
+          style={{
+            filter: `url(#ghost)`,
+          }}
+        >
+          CREATIVE
+          <br />
+          DEVELOPER
+        </motion.h2>
+      </div>
     </>
   );
 };
