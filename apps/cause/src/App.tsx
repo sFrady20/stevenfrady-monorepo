@@ -8,7 +8,7 @@ import {
   ScrollOutlet,
 } from "base";
 import frag from "~/shaders/background.frag.glsl?raw";
-import Router from "./components/Router";
+import Router from "~/components/Router";
 
 const App = () => {
   return (
