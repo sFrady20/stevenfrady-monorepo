@@ -37,7 +37,7 @@ float noise(in vec3 p){
 }
 
 void curves (inout vec4 col, inout vec2 uv) {
-    float ang = pow(pow(uv.x,0.5) * 0.1,0.8) + pow(pow(uv.x,2.), 2.);
+    float ang = max(pow(pow(uv.x,0.5) * 0.1,0.8) + pow(pow(uv.x,2.), 2.), 0.01);
 
     float b = step (uv.y, ang);
     b *= step( 0., uv.x ); // carve out negative x
@@ -61,7 +61,6 @@ void main() {
     vec2 aspect = vec2(1., resolution.y/resolution.x);
 
     uv -= 0.5;
-
     uv *= aspect;
 
     curves(col, uv);
