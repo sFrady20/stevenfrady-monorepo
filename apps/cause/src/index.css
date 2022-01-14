@@ -1,9 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;400&family=Roboto:ital@1&display=swap");
+
+@font-face {
+  font-family: zephyr;
+  src: url("/fonts/zephyr.otf") format("opentype");
+}
+
 * {
-  font-family: sans-serif;
+  font-family: Roboto sans-serif;
 }
 
 h1 {
-  font-family: sans-serif;
+  font-family: Roboto sans-serif;
 }
 
 body {
