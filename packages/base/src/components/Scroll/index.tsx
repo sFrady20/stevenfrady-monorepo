@@ -1,10 +1,4 @@
-import {
-  ForwardRefComponent,
-  HTMLMotionProps,
-  motion,
-  MotionValue,
-  useSpring,
-} from "framer-motion";
+import { HTMLMotionProps, motion, MotionValue, useSpring } from "framer-motion";
 import { merge } from "lodash";
 import { ReactNode, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";

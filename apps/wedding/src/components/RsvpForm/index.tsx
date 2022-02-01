@@ -7,11 +7,12 @@ import { firestore } from "~/services/firebase";
 type FormState = {
   name: string;
   message: string;
-  isAttending?: true;
-  isBringingGuest?: true;
+  isAttending?: boolean;
+  isBringingGuest?: boolean;
 };
 
 const submit = async (form: FormState) => {
+  if (!form.name) throw new Error("Name is required");
   const result = await addDoc(collection(firestore, "rsvp"), form);
   console.log(result);
 };
@@ -30,7 +31,7 @@ const RsvpForm = () => {
   });
 
   return (
-    <div className="bg-white p-12 flex flex-col space-y-8 w-600px">
+    <div id="rsvp" className="bg-white p-12 flex flex-col space-y-8 w-600px">
       <h2 className="text-size-32px text-center">RSVP</h2>
       <input
         value={form.name}
@@ -60,20 +61,66 @@ const RsvpForm = () => {
         <div className="space-y-2 flex-1">
           <div className="text-sm">Will you be attending?</div>
           <div className="flex flex-row divide-x-1 border-1 text-center">
-            <div className="px-5 py-3 flex-1">Yes</div>
-            <div className="px-5 py-3 flex-1">No</div>
+            <div
+              className={`px-5 py-3 flex-1 cursor-pointer ${
+                form.isAttending ? `bg-green-100` : ``
+              }`}
+              onClick={() =>
+                updateForm((f) => {
+                  f.isAttending = true;
+                })
+              }
+            >
+              Yes
+            </div>
+            <div
+              className={`px-5 py-3 flex-1 cursor-pointer ${
+                !form.isAttending ? `bg-red-100` : ``
+              }`}
+              onClick={() =>
+                updateForm((f) => {
+                  f.isAttending = false;
+                })
+              }
+            >
+              No
+            </div>
           </div>
         </div>
         <div className="space-y-2 flex-1">
           <div className="text-sm">Will you be bringing a guest?</div>
           <div className="flex flex-row divide-x-1 border-1 text-center">
-            <div className="px-5 py-3 flex-1">Yes</div>
-            <div className="px-5 py-3 flex-1">No</div>
+            <div
+              className={`px-5 py-3 flex-1 cursor-pointer ${
+                form.isBringingGuest ? `bg-green-100` : ``
+              }`}
+              onClick={() =>
+                updateForm((f) => {
+                  f.isBringingGuest = true;
+                })
+              }
+            >
+              Yes
+            </div>
+            <div
+              className={`px-5 py-3 flex-1 cursor-pointer ${
+                !form.isBringingGuest ? `bg-red-100` : ``
+              }`}
+              onClick={() =>
+                updateForm((f) => {
+                  f.isBringingGuest = false;
+                })
+              }
+            >
+              No
+            </div>
           </div>
         </div>
       </div>
       {submission.error && (
-        <div className="color-red-500">{submission.error.message}</div>
+        <div className="text-red-500 text-sm text-center">
+          {submission.error.message}
+        </div>
       )}
       <button
         className="border border-solid border-black px-12 py-4 text-lg"

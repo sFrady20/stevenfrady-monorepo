@@ -1,4 +1,5 @@
 import "./App.css";
+import "@fortawesome/fontawesome-free/css/all.css";
 import "virtual:windi.css";
 import {
   ShaderCanvas,

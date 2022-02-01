@@ -873,6 +873,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-free@npm:^5.15.4":
+  version: 5.15.4
+  resolution: "@fortawesome/fontawesome-free@npm:5.15.4"
+  checksum: 32281c3df4075290d9a96dfc22f72fadb3da7055d4117e48d34046b8c98032a55fa260ae351b0af5d6f6fb57a2f5d79a4abe52af456da35195f7cb7dda27b4a2
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.2
   resolution: "@gar/promisify@npm:1.1.2"
@@ -3695,6 +3702,7 @@ resolve@^1.20.0:
   version: 0.0.0-use.local
   resolution: "stevenfrady-monorepo@workspace:."
   dependencies:
+    "@fortawesome/fontawesome-free": ^5.15.4
     path: ^0.12.7
   languageName: unknown
   linkType: soft
