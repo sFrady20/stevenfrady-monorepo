@@ -31,6 +31,7 @@ const RsvpForm = () => {
 
   return (
     <div className="bg-white p-12 flex flex-col space-y-8 w-600px">
+      <h2 className="text-size-32px text-center">RSVP</h2>
       <input
         value={form.name}
         disabled={submission.loading}
@@ -55,6 +56,22 @@ const RsvpForm = () => {
           });
         }}
       />
+      <div className="flex flex-row space-x-6">
+        <div className="space-y-2 flex-1">
+          <div className="text-sm">Will you be attending?</div>
+          <div className="flex flex-row divide-x-1 border-1 text-center">
+            <div className="px-5 py-3 flex-1">Yes</div>
+            <div className="px-5 py-3 flex-1">No</div>
+          </div>
+        </div>
+        <div className="space-y-2 flex-1">
+          <div className="text-sm">Will you be bringing a guest?</div>
+          <div className="flex flex-row divide-x-1 border-1 text-center">
+            <div className="px-5 py-3 flex-1">Yes</div>
+            <div className="px-5 py-3 flex-1">No</div>
+          </div>
+        </div>
+      </div>
       {submission.error && (
         <div className="color-red-500">{submission.error.message}</div>
       )}
