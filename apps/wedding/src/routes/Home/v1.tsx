@@ -25,7 +25,7 @@ const HomePage = memo(() => {
   return (
     <>
       <section className="min-h-screen min-w-screen flex flex-col justify-center items-center space-y-8 p-20">
-        <div className="flex flex-col flex-1 justify-center min-h-[69vh]">
+        <div className="flex flex-col flex-1 justify-center">
           <h1 className="text-size-120px">Ariana & Steven</h1>
           <div className="flex space-x-8 text-size-20px items-center justify-center">
             <h3>September 18th, 2022</h3>
@@ -33,53 +33,65 @@ const HomePage = memo(() => {
             <h3>Savannah, Georgia</h3>
           </div>
         </div>
-        <div className="flex flex-col bg-gray-50">
-          <div className="flex flex-row rounded border-width-1px divide-x-1 bg-gray-50">
-            <div
-              className="w-500px bg-gray-50 space-y-2 px-10 py-8 cursor-pointer group hover:bg-gray-100 transition transition-colors relative"
-              onClick={() => {
-                const blob = new Blob([event.value || ""], {
-                  type: "text/plain;charset=utf-8",
-                });
-                saveAs(blob, "guyFradyWeddingCalEvent.ics");
-              }}
-            >
-              <div className="text-md inline border-b-width-1px pb-1">When</div>
+        <div className="flex flex-row rounded border-width-1px divide-x-1">
+          <div
+            className="w-320px bg-gray-50 space-y-2 px-8 py-5 cursor-pointer group hover:bg-gray-100 transition transition-colors relative"
+            onClick={() => {
+              const blob = new Blob([event.value || ""], {
+                type: "text/plain;charset=utf-8",
+              });
+              saveAs(blob, "guyFradyWeddingCalEvent.ics");
+            }}
+          >
+            <div className="text-md inline border-b-width-1px pb-1">When</div>
+            <div className="text-lg leading-normal">
+              Sunday, 18 September 2022
+              <br />
+              3:00PM to 8:30PM
+            </div>
+            <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 -top-8 rounded-md px-3 py-2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all group-hover:-top-10">
+              Add to Calendar
+            </div>
+          </div>
+          <a
+            target="_blank"
+            rel="noreferrer nofollow"
+            className="group"
+            href="https://www.google.com/maps/place/Mansion+on+Forsyth+Park/@32.0673266,-81.095102,17z/data=!3m1!5s0x88fb9e6ae299308d:0xc2e1ee74bcf72450!4m18!1m9!3m8!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!2sMansion+on+Forsyth+Park!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798!3m7!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798"
+          >
+            <div className="w-400px bg-gray-50 space-y-2 px-8 py-5 group-hover:bg-gray-100 transition transition-colors relative box-border">
+              <div className="text-md inline border-b-width-1px pb-1">
+                Where
+              </div>
               <div className="text-lg leading-normal">
-                Sunday, 18 September 2022
+                Mansion on Forsyth Park
                 <br />
-                3:00PM to 8:30PM
+                700 Drayton St, Savannah, GA 31401
               </div>
               <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 -top-8 rounded-md px-3 py-2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all group-hover:-top-10">
-                Add to Calendar
+                View Map
               </div>
             </div>
-            <a
-              target="_blank"
-              rel="noreferrer nofollow"
-              className="group"
-              href="https://www.google.com/maps/place/Mansion+on+Forsyth+Park/@32.0673266,-81.095102,17z/data=!3m1!5s0x88fb9e6ae299308d:0xc2e1ee74bcf72450!4m18!1m9!3m8!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!2sMansion+on+Forsyth+Park!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798!3m7!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798"
+          </a>
+          <div className="w-500px bg-gray-100 py-6 px-8 flex flex-row space-x-8 items-center">
+            <button
+              className="border border-solid border-black px-12 py-4 text-lg transform transition-all hover:bg-gray-200 hover:-translate-y-2px"
+              onClick={() => {
+                document.querySelector("#rsvp")!.scrollIntoView();
+              }}
             >
-              <div className="w-500px bg-gray-50 space-y-2 px-10 py-8 group-hover:bg-gray-100 transition transition-colors relative box-border">
-                <div className="text-md inline border-b-width-1px pb-1">
-                  Where
-                </div>
-                <div className="text-lg leading-normal">
-                  Mansion on Forsyth Park
-                  <br />
-                  700 Drayton St, Savannah, GA 31401
-                </div>
-                <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 -top-8 rounded-md px-3 py-2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all group-hover:-top-10">
-                  View Map
-                </div>
-              </div>
-            </a>
+              RSVP
+            </button>
+            <div className="text-size-xs leading-leading-snug">
+              Click here to RSVP online, or mail your response as per your
+              wedding invite
+            </div>
           </div>
-          Accomodations
-          <AboutCard />
         </div>
       </section>
-      <section className="min-w-screen flex flex-col justify-center items-center"></section>
+      <section className="min-w-screen flex flex-col justify-center items-center">
+        <AboutCard />
+      </section>
       <section className="min-w-screen flex flex-col items-center">
         <div className="flex flex-row flex-1 py-16 items-center">
           <div className="w-800px flex flex-row justify-center items-center relative">

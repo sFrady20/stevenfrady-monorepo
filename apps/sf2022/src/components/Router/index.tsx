@@ -7,7 +7,7 @@ import ShaderLayers from "../ShaderLayers";
 import { useLocation } from "react-router";
 import GenuaryPage from "~/pages/Genuary";
 import { AnimatePresence, motion, useUniforms } from "base";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 
 const useSeed = (generator?: () => number) => {
   generator = generator || (() => Math.random() * 100);

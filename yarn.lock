@@ -1395,6 +1395,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-runtime@npm:^6.26.0":
+  version: 6.26.0
+  resolution: "babel-runtime@npm:6.26.0"
+  dependencies:
+    core-js: ^2.4.0
+    regenerator-runtime: ^0.11.0
+  checksum: 8aeade94665e67a73c1ccc10f6fd42ba0c689b980032b70929de7a6d9a12eb87ef51902733f8fefede35afea7a5c3ef7e916a64d503446c1eedc9e3284bd3d50
+  languageName: node
+  linkType: hard
+
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -1701,6 +1711,13 @@ __metadata:
   version: 3.6.5
   resolution: "core-js@npm:3.6.5"
   checksum: b7fcf92f888bfe40f3f005e3f729e66aa49a3a9a797e8fb4d09d429c6abcd505781b2c03836858f0dc0159249d4b7a035fc763052c9c34adbc93b6f8a6a86305
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^2.4.0":
+  version: 2.6.12
+  resolution: "core-js@npm:2.6.12"
+  checksum: 44fa9934a85f8c78d61e0c8b7b22436330471ffe59ec5076fe7f324d6e8cf7f824b14b1c81ca73608b13bdb0fef035bd820989bf059767ad6fa13123bb8bd016
   languageName: node
   linkType: hard
 
@@ -2499,13 +2516,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"inherits@npm:2.0.3":
-  version: 2.0.3
-  resolution: "inherits@npm:2.0.3"
-  checksum: 78cb8d7d850d20a5e9a7f3620db31483aa00ad5f722ce03a55b110e5a723539b3716a3b463e2b96ce3fe286f33afc7c131fa2f91407528ba80cea98a7545d4c0
-  languageName: node
-  linkType: hard
-
 "ip@npm:^1.1.5":
   version: 1.1.5
   resolution: "ip@npm:1.1.5"
@@ -2726,6 +2736,13 @@ fsevents@~2.3.2:
   bin:
     loose-envify: cli.js
   checksum: 6517e24e0cad87ec9888f500c5b5947032cdfe6ef65e1c1936a0c48a524b81e65542c9c3edc91c97d5bddc806ee2a985dbc79be89215d613b1de5db6d1cfe6f4
+  languageName: node
+  linkType: hard
+
+"lottie-web@npm:^5.1.3":
+  version: 5.8.1
+  resolution: "lottie-web@npm:5.8.1"
+  checksum: 48c19ea7863310150dc9e46855b0f85179f3768ac0c0cf4f3ffb18944819079d3046c31ca04f2748291f3c413a855329a12ce9c3faae056a1a869776b6ed12a9
   languageName: node
   linkType: hard
 
@@ -3111,16 +3128,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"path@npm:^0.12.7":
-  version: 0.12.7
-  resolution: "path@npm:0.12.7"
-  dependencies:
-    process: ^0.11.1
-    util: ^0.10.3
-  checksum: 5dedb71e78fc008fcba797defc0b4e1cf06c1f18e0a631e03ba5bb505136f587ff017afc14f9a3d481cbe77aeedff7dc0c1d2ce4d820c1ebf3c4281ca49423a1
-  languageName: node
-  linkType: hard
-
 "picocolors@npm:^0.2.1":
   version: 0.2.1
   resolution: "picocolors@npm:0.2.1"
@@ -3187,13 +3194,6 @@ fsevents@~2.3.2:
   version: 2.0.1
   resolution: "process-nextick-args@npm:2.0.1"
   checksum: 1d38588e520dab7cea67cbbe2efdd86a10cc7a074c09657635e34f035277b59fbb57d09d8638346bf7090f8e8ebc070c96fa5fd183b777fff4f5edff5e9466cf
-  languageName: node
-  linkType: hard
-
-"process@npm:^0.11.1":
-  version: 0.11.10
-  resolution: "process@npm:0.11.10"
-  checksum: bfcce49814f7d172a6e6a14d5fa3ac92cc3d0c3b9feb1279774708a719e19acd673995226351a082a9ae99978254e320ccda4240ddc474ba31a76c79491ca7c3
   languageName: node
   linkType: hard
 
@@ -3278,6 +3278,18 @@ fsevents@~2.3.2:
   peerDependencies:
     react: 17.0.2
   checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
+  languageName: node
+  linkType: hard
+
+"react-lottie@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "react-lottie@npm:1.2.3"
+  dependencies:
+    babel-runtime: ^6.26.0
+    lottie-web: ^5.1.3
+  peerDependencies:
+    react: ^0.14.7 || ^15.0.0 || ^16.0.0
+  checksum: 05326e40b45cb1f52efe324386875858cec4725392d98033f767566c2f101bdbf59111a42108596ef63c96c897f13cf8d3c612e7a288d0dee3e1b7fb1a7911a2
   languageName: node
   linkType: hard
 
@@ -3382,6 +3394,13 @@ fsevents@~2.3.2:
   dependencies:
     picomatch: ^2.2.1
   checksum: 1ced032e6e45670b6d7352d71d21ce7edf7b9b928494dcaba6f11fba63180d9da6cd7061ebc34175ffda6ff529f481818c962952004d273178acd70f7059b320
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.11.0":
+  version: 0.11.1
+  resolution: "regenerator-runtime@npm:0.11.1"
+  checksum: 3c97bd2c7b2b3247e6f8e2147a002eb78c995323732dad5dc70fac8d8d0b758d0295e7015b90d3d444446ae77cbd24b9f9123ec3a77018e81d8999818301b4f4
   languageName: node
   linkType: hard
 
@@ -3701,9 +3720,6 @@ resolve@^1.20.0:
 "stevenfrady-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "stevenfrady-monorepo@workspace:."
-  dependencies:
-    "@fortawesome/fontawesome-free": ^5.15.4
-    path: ^0.12.7
   languageName: unknown
   linkType: soft
 
@@ -4049,15 +4065,6 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"util@npm:^0.10.3":
-  version: 0.10.4
-  resolution: "util@npm:0.10.4"
-  dependencies:
-    inherits: 2.0.3
-  checksum: 913f9a90d05a60e91f91af01b8bd37e06bca4cc02d7b49e01089f9d5b78be2fffd61fb1a41b517de7238c5fc7337fa939c62d1fb4eb82e014894c7bee6637aaf
-  languageName: node
-  linkType: hard
-
 "utility-types@npm:^3.10.0":
   version: 3.10.0
   resolution: "utility-types@npm:3.10.0"
@@ -4155,6 +4162,7 @@ resolve@^1.20.0:
   version: 0.0.0-use.local
   resolution: "wedding@workspace:apps/wedding"
   dependencies:
+    "@fortawesome/fontawesome-free": ^5.15.4
     "@googlemaps/js-api-loader": ^1.13.1
     "@react-three/fiber": ^7.0.17
     "@types/file-saver": ^2.0.4
@@ -4175,6 +4183,7 @@ resolve@^1.20.0:
     react: ^17.0.0
     react-async-hook: ^4.0.0
     react-dom: ^17.0.0
+    react-lottie: ^1.2.3
     react-router: ^6.0.2
     react-router-dom: ^6.0.2
     sass: ^1.42.1
