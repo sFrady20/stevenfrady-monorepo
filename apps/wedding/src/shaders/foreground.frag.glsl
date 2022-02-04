@@ -34,7 +34,7 @@ void grain(inout vec4 col, inout vec2 uv) {
 void fade(inout vec4 col, inout vec2 uv) {
 	float f = uv.x*0.33+pow(abs(transition), 0.8)*sign(transition);
 	f = smoothstep(0.33,0.66, f) + (1.-smoothstep(-0.66,-0.33, f));
-	col = vec4(mix(col.rgb, vec3(0.), f), col.a + f);
+	col = vec4(mix(col.rgb, vec3(0.9), f), col.a + f);
 }
 
 void footer(inout vec4 col, inout vec2 uv) {

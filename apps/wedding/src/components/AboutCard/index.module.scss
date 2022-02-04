@@ -19,9 +19,9 @@
   & > button {
     position: absolute;
     z-index: 10;
-    bottom: 25px;
+    bottom: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
   }
 
   &::after {
@@ -30,12 +30,20 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 300px;
+    height: 250px;
     background: linear-gradient(
       rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 1),
-      rgba(255, 255, 255, 1)
+      rgba(249, 250, 251, 1),
+      rgba(249, 250, 251, 1)
     );
     z-index: 5;
+    transition: opacity 0.5s ease-out;
+  }
+  &.expanded::after {
+    opacity: 0;
+  }
+
+  & p {
+    margin-bottom: 24px;
   }
 }

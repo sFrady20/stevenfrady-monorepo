@@ -34,8 +34,8 @@ const RsvpForm = () => {
   });
 
   return (
-    <div id="rsvp" className="bg-white p-12 flex flex-col space-y-8 w-600px">
-      <h2 className="text-size-32px text-center">RSVP</h2>
+    <div className="bg-gray-50 p-12 flex flex-col space-y-8 w-650px relative">
+      <h2 className="text-size-40px text-center">RSVP</h2>
       <div className="relative flex flex-col space-y-8">
         <input
           value={form.name}
@@ -79,7 +79,7 @@ const RsvpForm = () => {
               </div>
               <div
                 className={`px-5 py-3 flex-1 cursor-pointer ${
-                  !form.isAttending ? `bg-red-100` : ``
+                  !form.isAttending ? `bg-gray-100` : ``
                 }`}
                 onClick={() =>
                   updateForm((f) => {
@@ -108,7 +108,7 @@ const RsvpForm = () => {
               </div>
               <div
                 className={`px-5 py-3 flex-1 cursor-pointer ${
-                  !form.isBringingGuest ? `bg-red-100` : ``
+                  !form.isBringingGuest ? `bg-gray-100` : ``
                 }`}
                 onClick={() =>
                   updateForm((f) => {
@@ -127,7 +127,7 @@ const RsvpForm = () => {
           </div>
         )}
         <button
-          className="border border-solid border-black px-12 py-4 text-lg"
+          className="border border-solid border-black px-12 py-4 text-lg transform transition-all hover:bg-gray-200 hover:-translate-y-2px"
           disabled={submission.loading}
           onClick={() => {
             submission.execute(form);
@@ -136,6 +136,11 @@ const RsvpForm = () => {
           Send
         </button>
       </div>
+      {isSuccess && (
+        <div className="absolute inset-0 bg-gray-50 flex justify-center items-center">
+          Thank you!
+        </div>
+      )}
     </div>
   );
 };
