@@ -18,11 +18,16 @@ const AboutCard = memo(() => {
 
   return (
     <motion.div
-      className={`${styles.about} ${isExpanded ? styles.expanded : ""}`}
+      className={`${styles.about} ${
+        isExpanded ? styles.expanded : ""
+      } p-15 <md:p-10 <md:mb-10`}
       style={{ height: expansion }}
     >
       <h2 className="text-size-50px">Our Story</h2>
-      <div className="text-size-xl leading-loose" ref={heightRef}>
+      <div
+        className="text-size-xl leading-loose <md:text-sm <md:leading-loose"
+        ref={heightRef}
+      >
         <p>
           Steven and Ariana met in Williamsburg, VA at the Brick House
           Tavern—the only place you can dance in Williamsburg. Steven was
@@ -51,7 +56,7 @@ const AboutCard = memo(() => {
         </p>
       </div>
       <button
-        className="border border-solid border-black px-12 py-4 text-lg transform transition-all hover:bg-gray-200 hover:-translate-y-2px"
+        className="border border-solid border-black px-12 py-4 text-lg transform transition-all hover:bg-gray-200 hover:-translate-y-2px <md:px-8"
         onClick={() => {
           setExpanded((e) => !e);
         }}

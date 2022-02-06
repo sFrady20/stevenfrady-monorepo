@@ -34,7 +34,7 @@ const RsvpForm = () => {
   });
 
   return (
-    <div className="bg-gray-50 p-12 flex flex-col space-y-8 w-650px relative">
+    <div className="bg-gray-50 p-12 flex flex-col space-y-8 w-650px relative <md:px-10">
       <h2 className="text-size-40px text-center">RSVP</h2>
       <div className="relative flex flex-col space-y-8">
         <input
@@ -61,7 +61,7 @@ const RsvpForm = () => {
             });
           }}
         />
-        <div className="flex flex-row space-x-6">
+        <div className="flex flex-row space-x-6 <md:space-x-0 <md:flex-col <md:space-y-6">
           <div className="space-y-2 flex-1">
             <div className="text-sm">Will you be attending?</div>
             <div className="flex flex-row divide-x-1 border-1 text-center">

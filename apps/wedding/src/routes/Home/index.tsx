@@ -24,17 +24,19 @@ const HomePage = memo(() => {
 
   return (
     <>
-      <section className="min-h-screen min-w-screen flex flex-col justify-center items-center space-y-8 p-20 <md:p-8">
-        <div className="flex flex-col flex-1 justify-center min-h-[69vh]">
-          <h1 className="text-size-100px">Ariana & Steven</h1>
-          <div className="flex space-x-8 text-size-16px items-center justify-center">
+      <section className="min-h-screen min-w-screen flex flex-col justify-center items-center space-y-8 p-20 <md:p-4">
+        <div className="flex flex-col flex-1 justify-center min-h-[69vh] <md:min-h-[40vh] <md:space-y-8">
+          <h1 className="text-size-100px <md:text-size-70px text-center <md:max-w-70">
+            Ariana & Steven
+          </h1>
+          <div className="flex md:space-x-8 text-size-16px items-center justify-center <md:hidden">
             <h3>September 18th, 2022</h3>
-            <span className="w-5px h-5px rounded-full bg-black" />
+            <span className="w-5px h-5px rounded-full bg-black <md:hidden" />
             <h3>Savannah, Georgia</h3>
           </div>
         </div>
         <div className="flex flex-col items-center max-w-1024px w-full">
-          <div className="flex w-full flex-row rounded-t border-width-1px divide-x-1 bg-gray-50 text-center">
+          <div className="flex w-full flex-row rounded-t border-width-1px divide-x-1 bg-gray-50 text-center <md:flex-col <md:divide-y-1">
             <div
               className="flex-1 bg-gray-50 space-y-2 px-10 py-8 cursor-pointer group hover:bg-gray-100 transition transition-colors relative"
               onClick={() => {
@@ -75,34 +77,34 @@ const HomePage = memo(() => {
               </div>
             </a>
           </div>
-          <div className="w-full flex justify-center p-20 from-gray-200 to-gray-100 bg-gradient-to-b">
+          <div className="w-full flex justify-center p-20 from-gray-200 to-gray-100 bg-gradient-to-b <md:p-0">
             <RsvpForm />
           </div>
           <div className="h-1px w-full bg-gray-200" />
-          <div className="bg-gray-50 w-full py-20 relative flex justify-center">
-            <div className="pointer-events-none absolute left-0 top-10 transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer transition-all active:scale-98">
+          <div className="bg-gray-50 w-full py-20 relative flex justify-center <md:flex-col <md:p-0 <md:items-center">
+            <div className="pointer-events-none md:absolute left-0 top-10 md:transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer transition-all active:scale-98  <md:w-full">
               <div
-                className="absolute transform -rotate-10 w-85 h-105 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 group-hover:scale-105 group-hover:-rotate-5 filter group-hover:blur-2px"
+                className="md:absolute md:transform -rotate-10 w-85 h-105 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 group-hover:scale-105 group-hover:-rotate-5 filter group-hover:blur-2px <md:w-80% <md:my-10"
                 style={{
                   backgroundImage: `url(${usImg})`,
                 }}
               />
-              <div className="relative z-10 border-width-1px bg-gray-50 rounded-full w-20 h-20 flex justify-center items-center opacity-0 transition-all duration-600 transform group-hover:opacity-100 group-hover:scale-110">
+              <div className="relative z-10 border-width-1px bg-gray-50 rounded-full w-20 h-20 flex justify-center items-center opacity-0 transition-all duration-600 transform group-hover:opacity-100 group-hover:scale-110 <md:hidden">
                 <i className="fas fa-images text-xl" />
               </div>
             </div>
             <AboutCard />
             <div
-              className="pointer-events-none absolute right-0 bottom-15 transform -translate-x-1/2-translate-y-1/2 flex justify-center items-center group cursor-pointer transition-all active:scale-98 z-10"
+              className="pointer-events-none md:absolute right-0 bottom-15 md:transform -translate-x-1/2-translate-y-1/2 flex justify-center items-center group cursor-pointer transition-all active:scale-98 z-10 <md:w-full"
               onClick={() => navigate("/us")}
             >
               <div
-                className="absolute transform rotate-10 w-85 h-105 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 group-hover:scale-105 group-hover:rotate-5 filter group-hover:blur-2px"
+                className="md:absolute md:transform rotate-10 w-85 h-105 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 group-hover:scale-105 group-hover:rotate-5 filter group-hover:blur-2px <md:w-80% <md:my-10"
                 style={{
                   backgroundImage: `url(${dominoImg})`,
                 }}
               />
-              <div className="relative z-10 border-width-1px bg-gray-50 rounded-full w-20 h-20 flex justify-center items-center opacity-0 transition-all duration-600 transform group-hover:opacity-100 group-hover:scale-110">
+              <div className="relative z-10 border-width-1px bg-gray-50 rounded-full w-20 h-20 flex justify-center items-center opacity-0 transition-all duration-600 transform group-hover:opacity-100 group-hover:scale-110 <md:hidden">
                 <i className="fas fa-paw text-xl" />
               </div>
             </div>
@@ -124,11 +126,11 @@ const HomePage = memo(() => {
         </div>
       </section>
       <section className="min-w-screen flex flex-col items-center">
-        <div className="container border-t-1 border-white mx-auto p-4 flex flex-row space-x-6 text-white items-center">
+        <div className="container border-t-1 border-white mx-auto p-4 flex flex-row space-x-6 text-white items-center <md:flex-col <md:space-y-2 <md:py-12">
           <h1 className="text-size-32px">A&S</h1>
           <div className="text-size-sm">September 18th, 2022</div>
           <div className="text-size-sm">700 Drayton St Savannah, GA 31401</div>
-          <div className="flex-1"></div>
+          <div className="flex-1 <md:hidden"></div>
           <div className="opacity-80 text-size-sm">
             Des. & Dev. by{" "}
             <a href="http://stevenfrady.com" target="_blank">
