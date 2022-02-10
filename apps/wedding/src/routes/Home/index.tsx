@@ -84,7 +84,7 @@ const HomePage = memo(() => {
           <div className="bg-gray-50 w-full py-20 relative flex justify-center <md:flex-col <md:p-0 <md:items-center">
             <div className="pointer-events-none md:absolute left-0 top-10 md:transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer transition-all active:scale-98  <md:w-full">
               <div
-                className="md:absolute md:transform -rotate-10 w-85 h-105 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 group-hover:scale-105 group-hover:-rotate-5 filter group-hover:blur-2px <md:w-80% <md:my-10"
+                className="w-75 h-90 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 filter md:(absolute transform -rotate-10) group-hover:(scale-105 -rotate-5 blur-2px) <md:(w-80% my-10)"
                 style={{
                   backgroundImage: `url(${usImg})`,
                 }}
@@ -99,7 +99,7 @@ const HomePage = memo(() => {
               onClick={() => navigate("/us")}
             >
               <div
-                className="md:absolute md:transform rotate-10 w-85 h-105 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 group-hover:scale-105 group-hover:rotate-5 filter group-hover:blur-2px <md:w-80% <md:my-10"
+                className="w-75 h-90 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 filter md:(absolute transform rotate-10) group-hover:(scale-105 rotate-5 blur-2px) <md:(w-80% my-10)"
                 style={{
                   backgroundImage: `url(${dominoImg})`,
                 }}

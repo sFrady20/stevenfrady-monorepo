@@ -1,4 +1,10 @@
-import { HTMLMotionProps, motion, MotionValue, useSpring } from "framer-motion";
+import {
+  HTMLMotionProps,
+  motion,
+  MotionValue,
+  useMotionValue,
+  useSpring,
+} from "framer-motion";
 import { merge } from "lodash";
 import { ReactNode, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
@@ -16,6 +22,13 @@ const defaultScrollContext: ScrollContextType = {
   scrollRef: undefined as any,
 };
 const ScrollContext = createContext(defaultScrollContext);
+
+//TODO: this won't work in nextjs
+const isTouchDevice =
+  "ontouchstart" in window ||
+  navigator.maxTouchPoints > 0 ||
+  //@ts-ignore
+  navigator.msMaxTouchPoints > 0;
 
 const ScrollProvider = (
   props: HTMLMotionProps<"div"> & {
@@ -37,8 +50,16 @@ const ScrollProvider = (
     []
   );
 
-  const scrollX = useSpring(window.scrollX, opts);
-  const scrollY = useSpring(window.scrollY, opts);
+  const scrollXSpring = useSpring(window.scrollX, opts);
+  const scrollYSpring = useSpring(window.scrollY, opts);
+
+  const regX = useMotionValue(0);
+  const regY = useMotionValue(0);
+
+  //TODO: make consumers use their own spring
+
+  const scrollX = isTouchDevice ? regX : scrollXSpring;
+  const scrollY = isTouchDevice ? regY : scrollYSpring;
   const scrollRef = useRef(new Vector2(0, 0)).current;
 
   useEffect(() => {
