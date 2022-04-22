@@ -18,8 +18,8 @@ const AttractionCard = memo((props: AttractionProps) => {
 
   return (
     <a href={link} target="_blank">
-      <div className="p-10 transition-all space-y-6 flex flex-col rounded-sm h-full hover:(bg-gray-100) <lg:(p-3) <sm:(flex-row space-y-0 space-x-6 py-7)">
-        <div className="w-full <sm:(w-1/3)">
+      <div className="p-10 transition-all space-y-6 flex flex-col rounded-sm h-full hover:(bg-gray-100) <lg:(p-3) <sm:(py-7)">
+        <div className="w-full">
           <img className="rounded-sm" src={imgUrl} />
         </div>
         <div className="flex-1">
@@ -115,21 +115,24 @@ const AttractionsSection = memo(() => {
               style={{ opacity: category === 0 ? 1 : 0.5 }}
               onClick={() => setCategory(0)}
             >
-              Sight Seeing
+              <span className="sm:(hidden)">Sights</span>
+              <span className="<sm:(hidden)">Sight Seeing</span>
             </div>
             <div
               className="pt-2 pb-4 cursor-pointer hover:(bg-gray-100)"
               style={{ opacity: category === 1 ? 1 : 0.5 }}
               onClick={() => setCategory(1)}
             >
-              Restaurants
+              <span className="sm:(hidden)">Food</span>
+              <span className="<sm:(hidden)">Restaurants</span>
             </div>
             <div
               className="pt-2 pb-4 cursor-pointer hover:(bg-gray-200)"
               style={{ opacity: category === 2 ? 1 : 0.5 }}
               onClick={() => setCategory(2)}
             >
-              Tours / Travel
+              <span className="sm:(hidden)">Tours</span>
+              <span className="<sm:(hidden)">Tours / Travel</span>
             </div>
           </div>
           <div className="absolute h-1px w-full bottom-0 left-0">

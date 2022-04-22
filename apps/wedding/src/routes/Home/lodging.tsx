@@ -40,7 +40,7 @@ const ResourceLink = memo((props: { Svg: string; link: string }) => {
 
 const LodgingSection = memo(() => {
   return (
-    <div className="bg-gray-50 w-full relative p-15 <md:(px-10) <sm:(px-5)">
+    <div className="bg-gray-50 w-full relative p-15 <md:(px-10) <sm:(px-0)">
       <div className="text-center pb-10">
         <h3 className="text-size-44px pb-10 border-b-1px inline-block">
           Where to Stay
@@ -81,9 +81,9 @@ const LodgingSection = memo(() => {
             </div>
           </div>
         </div>
-        <div className="flex-1">
-          <div className="p-10 flex flex-col items-center <lg:(flex-row space-x-10 px-0 items-start) <sm:(space-x-5)">
-            <div>
+        <div className="flex-1 <sm:(w-full)">
+          <div className="p-10 flex flex-col items-center <lg:(flex-row space-x-10 px-0 items-start) <sm:(flex-col space-x-0 px-5 items-center)">
+            <div className=" <sm:(flex-col w-full)">
               <p className="max-w-300px text-left text-16px leading-relaxed opacity-90 mb-32px italic px-5">
                 Rent a historic home for the weekend
               </p>
@@ -104,7 +104,7 @@ const LodgingSection = memo(() => {
               </div>
             </div>
 
-            <div>
+            <div className=" <sm:(flex-col w-full)">
               <p className="max-w-300px text-left text-16px leading-relaxed opacity-90 mb-32px italic px-5">
                 or search on one of these sites for more hotel options
               </p>
