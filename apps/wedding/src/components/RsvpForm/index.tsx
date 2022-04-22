@@ -41,7 +41,7 @@ const RsvpForm = () => {
           value={form.name}
           disabled={submission.loading}
           placeholder="Name"
-          className="bg-transparent border-b-width-1px border-gray-300 py-2 px-4"
+          className="bg-transparent border-b-width-1px border-gray-300 py-4 px-4"
           onChange={(e) => {
             const val = e.target.value;
             updateForm((form) => {
@@ -53,7 +53,7 @@ const RsvpForm = () => {
           value={form.message}
           disabled={submission.loading}
           placeholder="Short Message (Optional)"
-          className="bg-transparent border-b-width-1px border-gray-300 py-2 px-4"
+          className="bg-transparent border-b-width-1px border-gray-300 py-4 px-4"
           onChange={(e) => {
             const val = e.target.value;
             updateForm((form) => {

@@ -1,12 +1,20 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import reactRefresh from "vite-plugin-react-svg";
 import WindiCSS from "vite-plugin-windicss";
+import svgLoader from "vite-plugin-react-svg";
 import glsl from "vite-plugin-glsl";
 import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), WindiCSS(), glsl()],
+  plugins: [
+    react(),
+    reactRefresh(),
+    WindiCSS(),
+    svgLoader({ defaultExport: "component" }),
+    glsl(),
+  ],
   optimizeDeps: {
     entries: ["base"],
   },

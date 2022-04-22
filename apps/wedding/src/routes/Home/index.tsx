@@ -1,115 +1,32 @@
 import React, { memo } from "react";
 import RsvpForm from "~/components/RsvpForm";
-import { createEvent } from "ics";
-import { saveAs } from "file-saver";
-
-import dominoImg from "~/assets/domino/IMG_20210617_115548.jpg";
-import usImg from "~/assets/us/20161218_135922.jpg";
-import AboutCard from "~/components/AboutCard";
-import { useNavigate } from "react-router";
-
-const event = createEvent({
-  start: [2022, 9, 18, 15, 0],
-  duration: { hours: 5, minutes: 30 },
-  title: "Ariana & Steven's Wedding",
-  location: "Mansion on Forsyth, 700 Drayton St, Savannah, GA 31401",
-  geo: { lat: 32.0673266, lon: -81.095102 },
-  busyStatus: "BUSY",
-  organizer: { name: "Ariana", email: "acguy92@gmail.com" },
-  url: "https://www.guyfradywedding.com",
-});
+import AboutSection from "./about";
+import ActionsSection from "./actions";
+import AttractionsSection from "./attractions";
+import LodgingSection from "./lodging";
 
 const HomePage = memo(() => {
-  const navigate = useNavigate();
-
   return (
     <>
-      <section className="min-h-screen min-w-screen flex flex-col justify-center items-center space-y-8 p-20 <md:p-4">
-        <div className="flex flex-col flex-1 justify-center min-h-[69vh] <md:min-h-[40vh] <md:space-y-8">
-          <h1 className="text-size-100px <md:text-size-70px text-center <md:max-w-70">
+      <section className="min-h-screen min-w-screen flex flex-col justify-center items-center space-y-8 p-20 <md:(p-4)">
+        <div className="flex flex-col flex-1 justify-center min-h-[69vh] max-w-1024px w-full space-y-12 <md:(min-h-[40vh] space-y-8 items-center)">
+          <h1 className="text-size-100px text-center <md:(max-w-70 text-size-70px text-center)">
             Ariana & Steven
           </h1>
-          <div className="flex md:space-x-8 text-size-16px items-center justify-center <md:hidden">
-            <h3>September 18th, 2022</h3>
+          <div className="flex md:space-x-8 text-size-20px items-center justify-center <md:hidden">
+            <p>September 18th, 2022</p>
             <span className="w-5px h-5px rounded-full bg-black <md:hidden" />
-            <h3>Savannah, Georgia</h3>
+            <p>Savannah, Georgia</p>
           </div>
         </div>
         <div className="flex flex-col items-center max-w-1024px w-full">
-          <div className="flex w-full flex-row rounded-t border-width-1px divide-x-1 bg-gray-50 text-center <md:flex-col <md:divide-y-1">
-            <div
-              className="flex-1 bg-gray-50 space-y-2 px-10 py-8 cursor-pointer group hover:bg-gray-100 transition transition-colors relative"
-              onClick={() => {
-                const blob = new Blob([event.value || ""], {
-                  type: "text/plain;charset=utf-8",
-                });
-                saveAs(blob, "guyFradyWeddingCalEvent.ics");
-              }}
-            >
-              <div className="text-md inline border-b-width-1px pb-1">When</div>
-              <div className="text-lg leading-normal">
-                Sunday, 18 September 2022
-                <br />
-                3:00PM to 8:30PM
-              </div>
-              <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 -top-8 rounded-md px-3 py-2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all group-hover:-top-10">
-                Add to Calendar
-              </div>
-            </div>
-            <a
-              target="_blank"
-              rel="noreferrer nofollow"
-              className="group flex-1"
-              href="https://www.google.com/maps/place/Mansion+on+Forsyth+Park/@32.0673266,-81.095102,17z/data=!3m1!5s0x88fb9e6ae299308d:0xc2e1ee74bcf72450!4m18!1m9!3m8!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!2sMansion+on+Forsyth+Park!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798!3m7!1s0x88fb9e6b00fe6bf3:0xc89c03b17fd0602!5m2!4m1!1i2!8m2!3d32.0670356!4d-81.0950798"
-            >
-              <div className="bg-gray-50 space-y-2 px-10 py-8 group-hover:bg-gray-100 transition transition-colors relative box-border">
-                <div className="text-md inline border-b-width-1px pb-1">
-                  Where
-                </div>
-                <div className="text-lg leading-normal">
-                  Mansion on Forsyth Park
-                  <br />
-                  700 Drayton St, Savannah, GA 31401
-                </div>
-                <div className="bg-[rgba(20,20,20,0.8)] text-sm text-white absolute left-1/2 -top-8 rounded-md px-3 py-2 opacity-0 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all group-hover:-top-10">
-                  View Map
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="w-full flex justify-center p-20 from-gray-200 to-gray-100 bg-gradient-to-b <md:p-0">
+          <ActionsSection />
+          <AboutSection />
+          <LodgingSection />
+          <AttractionsSection />
+          <div className="w-full flex justify-center p-20 from-gray-200 to-gray-100 bg-gradient-to-t <md:(p-5)">
             <RsvpForm />
           </div>
-          <div className="h-1px w-full bg-gray-200" />
-          <div className="bg-gray-50 w-full py-20 relative flex justify-center <md:flex-col <md:p-0 <md:items-center">
-            <div className="pointer-events-none md:absolute left-0 top-10 md:transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center group cursor-pointer transition-all active:scale-98  <md:w-full">
-              <div
-                className="w-75 h-90 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 filter md:(absolute transform -rotate-10) group-hover:(scale-105 -rotate-5 blur-2px) <md:(w-80% my-10)"
-                style={{
-                  backgroundImage: `url(${usImg})`,
-                }}
-              />
-              <div className="relative z-10 border-width-1px bg-gray-50 rounded-full w-20 h-20 flex justify-center items-center opacity-0 transition-all duration-600 transform group-hover:opacity-100 group-hover:scale-110 <md:hidden">
-                <i className="fas fa-images text-xl" />
-              </div>
-            </div>
-            <AboutCard />
-            <div
-              className="pointer-events-none md:absolute right-0 bottom-15 md:transform -translate-x-1/2-translate-y-1/2 flex justify-center items-center group cursor-pointer transition-all active:scale-98 z-10 <md:w-full"
-              onClick={() => navigate("/us")}
-            >
-              <div
-                className="w-75 h-90 bg-gray-900 bg-cover bg-center shadow shadow-xl rounded-lg transition-all duration-600 filter md:(absolute transform rotate-10) group-hover:(scale-105 rotate-5 blur-2px) <md:(w-80% my-10)"
-                style={{
-                  backgroundImage: `url(${dominoImg})`,
-                }}
-              />
-              <div className="relative z-10 border-width-1px bg-gray-50 rounded-full w-20 h-20 flex justify-center items-center opacity-0 transition-all duration-600 transform group-hover:opacity-100 group-hover:scale-110 <md:hidden">
-                <i className="fas fa-paw text-xl" />
-              </div>
-            </div>
-          </div>
-          <div className="h-1px w-full bg-gray-200" />
           <div className="w-full text-sm leading-loose bg-gray-50 py-20 px-8 text-gray-500 text-center flex justify-center">
             <div className="max-w-600px">
               <p>
@@ -126,17 +43,10 @@ const HomePage = memo(() => {
         </div>
       </section>
       <section className="min-w-screen flex flex-col items-center">
-        <div className="container border-t-1 border-white mx-auto p-4 flex flex-row space-x-6 text-white items-center <md:flex-col <md:space-y-2 <md:py-12">
+        <div className="container text-white mx-auto p-4 flex flex-row space-x-6 justify-center items-center <md:(flex-col space-y-2 py-12)">
           <h1 className="text-size-32px">A&S</h1>
           <div className="text-size-sm">September 18th, 2022</div>
           <div className="text-size-sm">700 Drayton St Savannah, GA 31401</div>
-          <div className="flex-1 <md:hidden"></div>
-          <div className="opacity-80 text-size-sm">
-            Des. & Dev. by{" "}
-            <a href="http://stevenfrady.com" target="_blank">
-              Steven Frady
-            </a>
-          </div>
         </div>
       </section>
     </>

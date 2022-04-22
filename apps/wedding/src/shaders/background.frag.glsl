@@ -8,20 +8,24 @@ uniform float leftPanePresence;
 uniform float rightPanePresence;
 
 #define OCTAVES 6
-#define BASE_COL vec4(1., 0.97, + 0.94, 1.)
+#define BASE_COL vec4(1., 0.97, 0.94, 1.)
 #define PATTERN_TIME_SCALE 0.1
 #define STRIPE_COL vec4(0.9, 0.87, 0.84,1.)
 #define MARBLE_SCALE 0.0025
 
 #define PANE_COLOR vec4(1.,1.,1.,1.)
-#define SPLASH_COLOR_1 vec4(0.95,0.95,0.95,1.)
-#define SPLASH_COLOR_2 vec4(0.6,0.6,0.6,1.)
-#define LINKS_COLOR_1 vec4(1.,0.5,0.5,1.)
-#define LINKS_COLOR_2 vec4(0.5,0.5,1.,1.)
-#define LODGING_COLOR_1 vec4(.6,.5,.94,1.)
-#define LODGING_COLOR_2 vec4(.95,0.95,0.4,1.)
-#define RSVP_COLOR_1 vec4(.05,0.0,0.1,1.)
-#define RSVP_COLOR_2 vec4(.3,.37,.5,1.)
+#define SPLASH_COLOR_1 vec4(0.9412, 0.9412, 0.9412, 1.0)
+#define SPLASH_COLOR_2 vec4(0.6549, 0.5373, 0.8078, 1.0)
+#define LINKS_COLOR_1 vec4(0.7098, 0.6706, 0.8392, 1.0)
+#define LINKS_COLOR_2 vec4(0.4, 0.698, 0.9412, 1.0)
+#define LODGING_COLOR_1 vec4(0.7765, 0.7647, 0.8549, 1.0)
+#define LODGING_COLOR_2 vec4(0.7686, 0.8431, 1.0, 1.0)
+#define RSVP_COLOR_1 vec4(0.5294, 0.4784, 0.6784, 1.0)
+#define RSVP_COLOR_2 vec4(0.8275, 0.7961, 0.902, 1.0)
+#define COLOR_5_1 vec4(0.3333, 0.2745, 0.4902, 1.0)
+#define COLOR_5_2 vec4(1.0, 1.0, 1.0, 1.0)
+#define COLOR_6_1 vec4(0.6549, 0.5373, 0.702, 1.0)
+#define COLOR_6_2 vec4(0.8941, 0.8941, 0.8941, 1.0)
 
 //TODO: fireworks at bottom
 //https://www.shadertoy.com/view/lscGRl
@@ -79,16 +83,23 @@ void marble (inout vec4 col, inout vec2 uv) {
     float marbleVal = pattern(scaledMarblePos);
     vec2 scrollUv = scroll.xy / resolution.xy;
 
-    col = mix (SPLASH_COLOR_1, SPLASH_COLOR_2, pow(marbleVal, 3.));
+    col = mix (SPLASH_COLOR_1, SPLASH_COLOR_2, pow(marbleVal, 5.));
 
-    vec4 linksCol = mix (LINKS_COLOR_1, LINKS_COLOR_2, pow(marbleVal, 1.));
+    vec4 linksCol = mix (LINKS_COLOR_1, LINKS_COLOR_2, pow(marbleVal, 5.));
     col = mix (col, linksCol, smoothstep(0.5,1.,scrollUv.y + marbleVal));
 
-    vec4 lodgingCol = mix (LODGING_COLOR_1, LODGING_COLOR_2, pow(marbleVal, 2.));
-    col = mix (col, lodgingCol, smoothstep(1.5,2.0,scrollUv.y + marbleVal));
+    vec4 lodgingCol = mix (LODGING_COLOR_1, LODGING_COLOR_2, pow(marbleVal, 5.));
+    col = mix (col, lodgingCol, smoothstep(1.0,2.0,scrollUv.y + marbleVal));
 
-    // vec4 rsvpCol = mix (RSVP_COLOR_1, RSVP_COLOR_2, pow(marbleVal, 5.));
-    // col = mix (col, rsvpCol, smoothstep(1.9,2.0,scrollUv.y + marbleVal));
+    vec4 rsvpCol = mix (RSVP_COLOR_1, RSVP_COLOR_2, pow(marbleVal, 5.));
+    col = mix (col, rsvpCol, smoothstep(2.0,3.0,scrollUv.y + marbleVal));
+
+    vec4 col5 = mix (COLOR_5_1, COLOR_5_2, pow(marbleVal, 5.));
+    col = mix (col, col5, smoothstep(3.0,4.0,scrollUv.y + marbleVal));
+
+    vec4 col6 = mix (COLOR_6_1, COLOR_6_2, pow(marbleVal, 5.));
+    col = mix (col, col6, smoothstep(4.0,6.0,scrollUv.y + marbleVal));
+
 }
 
 void leftPane (inout vec4 col, inout vec2 uv) {

@@ -74,16 +74,6 @@ vec3 etherLayer(vec2 p) {
 
 	//rCol += etherBubble(p, time, 1.);
 
-	// float rep = p.y;
-	// for(int i=0; i<10; i++)	{
-	// 	float rpx = (noise(vec2(float(i) * 62.415, seed)) * 1. - 0.25) * aspect.x;
-	// 	float rpy = (noise(vec2(float(i) * 53.52, seed)) * 1. - 0.25) * aspect.y;
-	// 	float rpt = time + noise(vec2(float(i) * 125.35, seed)) * 100.;
-	// 	float rps = noise(vec2(seed, float(i) * 125.35)) * 10.;
-
-	// 	rCol += etherBubble(p + vec2(rpx, rpy), rpt, 0.01);
-	// }
-
 	return rCol;
 }
 
@@ -105,7 +95,7 @@ void main() {
 	float a = 0.;
 
 	//bg
-  float m = noise(uv*3. - vec2(scroll.y * 0.3, scroll.y * 0.3) / resolution.xy * aspect);
+  float m = noise(uv*3. - vec2(scroll.y * 0.3, scroll.y * 0.3) / resolution.xy * aspect) * 0.3;
 	col = mix(col, vec3((uv.x)*.4,uv.x,uv.y), m);
 	a += m;
 

@@ -1,4 +1,5 @@
 import { AnimatePresence, motion, useUniforms } from "base";
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import GalleryPage from "~/routes/Gallery";
 import HomePage from "~/routes/Home";
@@ -36,7 +37,7 @@ const AnimatedPages = () => {
         }}
       >
         <Routes location={location}>
-          <Route path="/us" element={<GalleryPage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/domino" element={<GalleryPage />} />
           <Route path="*" element={<HomePage />} />
         </Routes>

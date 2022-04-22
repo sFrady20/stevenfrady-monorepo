@@ -46,7 +46,7 @@ void main() {
   vec2 uv = gl_FragCoord.xy / resolution.xy;
 	vec4 col = gl_FragColor;
 	
-	grain(col, uv);
+	//grain(col, uv);
 	fade(col, uv);
 
 	uv = gl_FragCoord.xy;

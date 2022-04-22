@@ -8,6 +8,7 @@ import { useLocation } from "react-router";
 import GenuaryPage from "~/pages/Genuary";
 import { AnimatePresence, motion, useUniforms } from "base";
 import { useCallback, useState } from "react";
+import TopBar from "../TopBar";
 
 const useSeed = (generator?: () => number) => {
   generator = generator || (() => Math.random() * 100);
@@ -77,6 +78,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <ShaderLayers>
+        <TopBar />
         <AnimatedPages />
         <BottomBar />
       </ShaderLayers>

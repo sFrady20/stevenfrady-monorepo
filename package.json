@@ -8,5 +8,9 @@
   "workspaces": [
     "packages/*",
     "apps/*"
+  ],
+  "nohoist": [
+    "**/electron",
+    "**/electron/**"
   ]
 }
