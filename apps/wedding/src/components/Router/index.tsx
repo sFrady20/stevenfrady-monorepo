@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import GalleryPage from "~/routes/Gallery";
 import HomePage from "~/routes/Home";
+import Guestlist from "~/routes/Guestlist";
 
 const AnimatedPages = () => {
   const location = useLocation();
@@ -39,6 +40,7 @@ const AnimatedPages = () => {
         <Routes location={location}>
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/domino" element={<GalleryPage />} />
+          <Route path="/guests" element={<Guestlist />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </motion.div>

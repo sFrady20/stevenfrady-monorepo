@@ -4,21 +4,21 @@ import { useAsync } from "react-async-hook";
 import { addDoc, collection } from "firebase/firestore";
 import { firestore } from "~/services/firebase";
 
-type FormState = {
+export type RsvpEntry = {
   name: string;
   message: string;
   isAttending?: boolean;
   isBringingGuest?: boolean;
 };
 
-const submit = async (form: FormState) => {
+const submit = async (form: RsvpEntry) => {
   if (!form.name) throw new Error("Name is required");
   const result = await addDoc(collection(firestore, "rsvp"), form);
   console.log(result);
 };
 
 const RsvpForm = () => {
-  const [form, updateForm] = useImmer<FormState>({
+  const [form, updateForm] = useImmer<RsvpEntry>({
     name: "",
     message: "",
     isAttending: true,
@@ -34,7 +34,7 @@ const RsvpForm = () => {
   });
 
   return (
-    <div className="bg-gray-50 p-12 flex flex-col space-y-8 w-650px relative <md:px-10">
+    <div className="bg-gray-50 p-12 flex flex-col space-y-8 w-650px relative <md:(px-5)">
       <h2 className="text-size-40px text-center">RSVP</h2>
       <div className="relative flex flex-col space-y-8">
         <input
@@ -135,6 +135,9 @@ const RsvpForm = () => {
         >
           Send
         </button>
+        <p className="text-center opacity-50 italic">
+          Please RSVP by June 30th
+        </p>
       </div>
       {isSuccess && (
         <div className="absolute inset-0 bg-gray-50 flex justify-center items-center">

@@ -42,8 +42,8 @@ const Slide = memo((props: { attractions: AttractionProps[] }) => {
         exit: { opacity: 0 },
       }}
     >
-      {attractions.map((attraction) => (
-        <div>
+      {attractions.map((attraction, i) => (
+        <div key={i}>
           <AttractionCard {...attraction} />
         </div>
       ))}
