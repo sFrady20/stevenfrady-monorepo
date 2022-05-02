@@ -68,7 +68,7 @@ vec3 etherLayer(vec2 p) {
 	//transform
 	p -= vec2(0.5, 0.5);
 	//scale
-	p *= aspect;
+	p *= aspect * 1.;
 
 	vec3 rCol = vec3(0.);
 
@@ -95,7 +95,7 @@ void main() {
 	float a = 0.;
 
 	//bg
-  float m = noise(uv*3. - vec2(scroll.y * 0.3, scroll.y * 0.3) / resolution.xy * aspect) * 0.3;
+  float m = noise(uv*3. - vec2(0., scroll.y) / resolution.xy * aspect) * 0.25;
 	col = mix(col, vec3((uv.x)*.4,uv.x,uv.y), m);
 	a += m;
 
