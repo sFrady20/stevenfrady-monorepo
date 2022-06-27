@@ -1,4 +1,3 @@
-import { Scroll } from "@react-three/drei";
 import { PeekingDiv, PeekingText } from "./peeking";
 
 const Initiative = () => {
@@ -49,16 +48,12 @@ const ExploreSection = () => {
         </div>
         <div className="col-span-3 col-start-6 pt-100px grid grid-cols-3">
           <PeekingText
-            ranges={[0.32, 0.32, 0.62, 0.63]}
             spring={{ tension: 200 }}
             className="text-96px col-span-3"
           >
             I EXPLORE
           </PeekingText>
-          <PeekingDiv
-            ranges={[0.32, 0.32, 0.62, 0.63]}
-            className="mt-100px col-span-2"
-          >
+          <PeekingDiv className="mt-100px col-span-2">
             <p className="raleway text-22px text-justify leading-2em tracking-0.2em uppercase">
               My hobbies include soccer, guitar, basketball, video games,
               Goofing off, buying hi, selling low, and surfing the web 🏄‍♂️

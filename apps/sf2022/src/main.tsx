@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
 import Router from "./components/Router";
 import { Canvas } from "@react-three/fiber";
@@ -13,10 +13,9 @@ import ThemeProvider from "./components/Theme";
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
-  <React.StrictMode>
-    <ErrorBoundary>
-      <ThemeProvider>
-        <OverlayScene />
+  <ErrorBoundary>
+    <ThemeProvider>
+      {/* <OverlayScene />
         <Canvas
           style={{
             position: "absolute",
@@ -25,15 +24,12 @@ root.render(
           }}
           className="inset-0 z-0"
           gl={{ alpha: true }}
-        >
-          <Suspense fallback={null}>
-            <ScrollControls damping={5} distance={0.8} pages={4}>
-              <Router />
-            </ScrollControls>
-            <Preload />
-          </Suspense>
-        </Canvas>
-      </ThemeProvider>
-    </ErrorBoundary>
-  </React.StrictMode>
+        > */}
+      <Suspense fallback={null}>
+        <Router />
+        {/* <Preload /> */}
+      </Suspense>
+      {/* </Canvas>*/}
+    </ThemeProvider>
+  </ErrorBoundary>
 );

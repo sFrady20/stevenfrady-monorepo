@@ -3,10 +3,11 @@ import react from "@vitejs/plugin-react";
 import WindiCSS from "vite-plugin-windicss";
 import glsl from "vite-plugin-glsl";
 import { resolve } from "path";
+import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), WindiCSS(), glsl()],
+  plugins: [react(), WindiCSS(), glsl(), svgr()],
   optimizeDeps: {
     entries: ["base"],
   },

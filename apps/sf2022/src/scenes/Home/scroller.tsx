@@ -1,23 +1,24 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import { useScroll } from "@react-three/drei";
 import { useMemo } from "react";
 import { animated, useTrail } from "react-spring";
+import { useScene } from "~/components/Scene";
+import useAnimationFrame from "~/hooks/useAnimationFrame";
 
 const ScrollContent = (props: { index: number; distance?: number }) => {
-  const { index, distance = 9 } = props;
+  const { index, distance = 3 } = props;
 
   const chars = useMemo(() => "SCROLL".split(""), []);
 
-  const scroll = useScroll();
+  const scene = useScene();
 
   const [trail, trailApi] = useTrail(1 + chars.length, () => ({
     scroll: 0 + index,
     loop: true,
   }));
 
-  useFrame(() => {
+  useAnimationFrame(() => {
     trailApi.start({
-      scroll: scroll.offset * distance + index,
+      scroll:
+        (scene.scroll.get() / scene.window.height.get()) * distance + index,
       config: {
         tension: 1200,
         friction: 55,
@@ -83,12 +84,12 @@ const ScrollContent = (props: { index: number; distance?: number }) => {
 };
 
 const Scroller = () => {
-  const size = useThree((x) => x.size);
+  //const size = useThree((x) => x.size);
 
   return (
     <div
       className="col-start-3 col-end-7 border-black border-l-1 border-r-1 h-10 flex justify-center items-end overflow-hidden"
-      style={{ height: 100, top: size.height - 80 - 130 }}
+      style={{ height: 100, top: `calc(100vh - 210px)` }}
     >
       <ScrollContent index={-1} />
       <ScrollContent index={0} />

@@ -1,50 +1,28 @@
-import { useFrame } from "@react-three/fiber";
-import { useScroll, ScrollControlsState } from "@react-three/drei";
 import { HTMLAttributes, useMemo } from "react";
-import { animated, useTrail, SpringConfig, useSpring } from "react-spring";
-
-type Ranges = [number, number, number, number];
-export const calcRangePresence = (
-  scroll: ScrollControlsState,
-  ranges: Ranges
-) => {
-  const ignoreStartRange = !ranges[0] && !ranges[1];
-  const ignoreEndRange = !ranges[2] && !ranges[3];
-
-  return (
-    (ignoreStartRange ? 1 : scroll.range(ranges[0], ranges[1])) *
-    (ignoreEndRange ? 1 : 1 - scroll.range(ranges[2], ranges[3]))
-  );
-};
+import { animated, useTrail, SpringConfig } from "react-spring";
+import { useSceneVisibility } from "~/components/Scene";
 
 export const PeekingText = (
   props: {
     children: string;
     spring?: SpringConfig;
-    ranges: [number, number, number, number];
   } & HTMLAttributes<HTMLSpanElement>
 ) => {
-  const { children, spring, ranges, className, ...rest } = props;
+  const { children, spring, className, ...rest } = props;
 
-  const scroll = useScroll();
   const chars = useMemo(() => children.split(""), [children]);
 
-  const [trail, trailApi] = useTrail(chars.length, () => ({
-    presence: 0,
+  const [ref, visibility] = useSceneVisibility();
+
+  const [trail] = useTrail(chars.length, () => ({
+    presence: visibility,
     config: spring,
   }));
-
-  useFrame(() => {
-    const rangePresence = calcRangePresence(scroll, ranges);
-    trailApi.start({
-      presence: rangePresence,
-      config: spring,
-    });
-  });
 
   return (
     <span
       {...rest}
+      ref={ref}
       className={`${className} overflow-hidden inline-block h-1em`}
     >
       {chars.map((c, i) => (
@@ -67,27 +45,23 @@ export const PeekingText = (
 export const PeekingImage = (
   props: {
     src: string;
-    ranges: Ranges;
     spring?: SpringConfig;
   } & HTMLAttributes<HTMLDivElement>
 ) => {
-  const { src, spring, ranges, className, style, ...rest } = props;
+  const { src, spring, className, style, ...rest } = props;
 
-  const scroll = useScroll();
+  const [ref, visibility] = useSceneVisibility();
 
-  const [trail, trailApi] = useTrail(2, () => ({
-    presence: 0,
+  const [trail] = useTrail(2, () => ({
+    presence: visibility,
+    config: spring,
   }));
-
-  useFrame(() => {
-    const rangePresence = calcRangePresence(scroll, ranges);
-    trailApi.start({ presence: rangePresence, config: spring });
-  });
 
   return (
     <animated.div
       {...rest}
       className={`${className} overflow-hidden`}
+      ref={ref}
       style={{
         ...style,
         translateY: trail[0].presence.to([0, 1], [`-50%`, `0%`]),
@@ -103,32 +77,19 @@ export const PeekingImage = (
   );
 };
 
-export const PeekingDiv = (
-  props: {
-    ranges: Ranges;
-    spring?: SpringConfig;
-  } & HTMLAttributes<HTMLDivElement>
-) => {
-  const { spring, ranges, style, children, ...rest } = props;
+export const PeekingDiv = (props: {} & HTMLAttributes<HTMLDivElement>) => {
+  const { style, children, ...rest } = props;
 
-  const scroll = useScroll();
-
-  const [spr, springApi] = useSpring(() => ({
-    presence: 0,
-  }));
-
-  useFrame(() => {
-    const rangePresence = calcRangePresence(scroll, ranges);
-    springApi.start({ presence: rangePresence, config: spring });
-  });
+  const [ref, visibility] = useSceneVisibility();
 
   return (
     <animated.div
       {...rest}
+      ref={ref}
       style={{
         ...style,
-        translateY: spr.presence.to([0, 1], [`-50%`, `0%`]),
-        opacity: spr.presence.to([0, 1], [0, 1]),
+        translateY: visibility?.to([0, 1], [`-50%`, `0%`]),
+        opacity: visibility?.to([0, 1], [0, 1]),
       }}
     >
       {children}
