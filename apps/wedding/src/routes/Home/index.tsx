@@ -24,9 +24,9 @@ const HomePage = memo(() => {
           <AboutSection />
           <LodgingSection />
           <AttractionsSection />
-          <div className="w-full flex justify-center p-20 from-gray-200 to-gray-100 bg-gradient-to-t <md:(p-5)">
+          {/* <div className="w-full flex justify-center p-20 from-gray-200 to-gray-100 bg-gradient-to-t <md:(p-5)">
             <RsvpForm />
-          </div>
+          </div> */}
           <div className="w-full text-sm leading-loose bg-gray-50 py-20 px-8 text-gray-500 text-center flex justify-center">
             <div className="max-w-600px">
               <p>
